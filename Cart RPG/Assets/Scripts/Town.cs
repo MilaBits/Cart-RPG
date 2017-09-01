@@ -1,50 +1,33 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Town : MonoBehaviour {
 
+    //The number of units away from the center of the town buildings can be placed
     public int buildingRadius;
-    public Vector3[] BuildingCoords;
+    //A list of locations where buildings will be placed
+    public List<Vector3> buildingLocations;
+    //A list of buildings that can be placed in the town
     public GameObject[] Buildings;
-    public List<int> buildingLimit;
-
 
     // Use this for initialization
     void Start() {
 
-        int buildingcount = 0;
-        foreach (var limit in buildingLimit)
-        {
-            buildingcount += limit;
-        }
-        BuildingCoords =int[buildingcount];
+        foreach (var building in Buildings) {
+            var buildingInfo = building.GetComponent<Building>();
+            for (int i = 0; i < buildingInfo.maxNumberOfInstances; i++) {
+                buildingLocations.Add(new Vector3(Random.Range(-buildingRadius, buildingRadius), 0,
+                    Random.Range(-buildingRadius, buildingRadius)));
 
-        int buildingIndex = 0;
-        foreach (var limit in buildingLimit) {
-            for (int i = 0; i < limit; i++) {
-                BuildingCoords[buildingIndex].x = Random.Range(-buildingRadius, buildingRadius);
-                BuildingCoords[buildingIndex].z = Random.Range(-buildingRadius, buildingRadius);
-
-                Instantiate(Buildings[buildingIndex], BuildingCoords[buildingIndex], Buildings[buildingIndex].transform.rotation);
+                Instantiate(building, buildingLocations.Last(), building.transform.rotation);
             }
-
-            buildingIndex++;
         }
-
-        //foreach (var building in Buildings) {
-        //    if (building != null) {
-        //        BuildingCoords[buildingIndex].x = Random.Range(-buildingRadius, buildingRadius);
-        //        BuildingCoords[buildingIndex].z = Random.Range(-buildingRadius, buildingRadius);
-
-        //        Instantiate(building, BuildingCoords[buildingIndex], building.transform.rotation);
-
-        //    }
-        //    buildingIndex++;
-        //}
     }
 
     // Update is called once per frame
     void Update() {
+
 
     }
 }

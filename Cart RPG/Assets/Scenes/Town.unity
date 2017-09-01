@@ -142,7 +142,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -302,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 1519261498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 4, z: 5}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 2006212727}
   m_RootOrder: 0
@@ -387,17 +387,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cffcd93e300e134a8a9dd61487e290b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingRadius: 0
-  BuildingCoords:
-  - {x: 0, y: 0, z: 10}
-  - {x: 10, y: 0, z: 0}
-  - {x: 0, y: 0, z: -10}
-  - {x: -10, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  buildingRadius: 25
+  buildingLocations: []
   Buildings:
-  - {fileID: 100000, guid: 69185bf6aff50974082d18d7d2c7e3f1, type: 3}
-  - {fileID: 100000, guid: 57fe2910fbd154a449053f107150e69f, type: 3}
-  buildingLimit: 0100000007000000
+  - {fileID: 1996620549511672, guid: acff37076ead7a84b862464606f6329e, type: 2}
+  - {fileID: 1088676268468270, guid: d10db21d8d0428440a9062a7f7225c62, type: 2}
 --- !u!4 &2006212727
 Transform:
   m_ObjectHideFlags: 0
