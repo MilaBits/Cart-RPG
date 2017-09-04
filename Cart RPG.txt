@@ -1,0 +1,32 @@
+Cart RPG
+- Player travels from town to town with a cart
+- Cart is modular and can be upgraded
+- roads are randomly generated
+- towns are hubs to trade, get quests, buy upgrades
+
+Player
+ - has a cart
+ - first person (probably)
+ - can walk freely around the cart
+
+Cart
+ - follows player but stays on the path
+ - can be upgraded
+    - size
+    - storage
+    - cage? (for animals (hunting) or people (bounties)
+    - crafting equipment
+    - value (higher value is higher risk of attacks)
+
+Town
+ - hub area
+ - shops
+    - sell loot and wares
+    - buy cart upgrades
+ - get new quests
+
+Roads
+ - Randomly generated
+ - In between towns you travel from and to
+ - lootable things on the way
+ - bandits
