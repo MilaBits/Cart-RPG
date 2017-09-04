@@ -387,6 +387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cffcd93e300e134a8a9dd61487e290b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallPiece: {fileID: 1720307344453096, guid: 5975204ad8260ac49bb1f10943f0530f, type: 2}
+  wallPieceCount: 40
+  wallRadius: 35
   townRadius: 25
   buildingLocations:
   - {x: 1, y: 0, z: 1}
@@ -403,7 +406,6 @@ MonoBehaviour:
   - {fileID: 1996620549511672, guid: acff37076ead7a84b862464606f6329e, type: 2}
   - {fileID: 1996620549511672, guid: acff37076ead7a84b862464606f6329e, type: 2}
   - {fileID: 1996620549511672, guid: acff37076ead7a84b862464606f6329e, type: 2}
-  buildingSpacing: 5
 --- !u!4 &2006212727
 Transform:
   m_ObjectHideFlags: 0
