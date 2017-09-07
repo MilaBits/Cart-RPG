@@ -1,34 +1,15 @@
 fileFormatVersion: 2
-guid: 82aa5a658a21b5a41a244586ac7adb44
-timeCreated: 1504683081
+guid: c3ffa560a36b5ad4db8665cd9a94acbc
+timeCreated: 1504770668
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
-    100002: BezierCurve
-    100004: Cube
-    100006: GateHouse
-    100008: Road
     400000: //RootNode
-    400002: BezierCurve
-    400004: Cube
-    400006: GateHouse
-    400008: Road
     2300000: //RootNode
-    2300002: BezierCurve
-    2300004: Cube
-    2300006: GateHouse
-    2300008: Road
     3300000: //RootNode
-    3300002: BezierCurve
-    3300004: Cube
-    3300006: GateHouse
-    3300008: Road
-    4300000: Cube
-    4300002: BezierCurve
-    4300004: GateHouse
-    4300006: Road
+    4300000: Cart
     7400000: Default Take
     9500000: //RootNode
   materials:

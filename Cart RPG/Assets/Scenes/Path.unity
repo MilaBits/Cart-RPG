@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 189540992}
   - component: {fileID: 189540991}
   - component: {fileID: 189540990}
+  - component: {fileID: 189540996}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -139,6 +140,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9581816fa4b6584abe23e65147cb80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookSensitivity: 5
+  lookSmoothnes: 0.1
+  walkSpeed: 6
+  jumpSpeed: 8
+  runSpeed: 8
+  gravity: 20
 --- !u!114 &189540991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +236,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &189540996
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 189540989}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 20
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &312629580 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 82aa5a658a21b5a41a244586ac7adb44, type: 3}
+  m_PrefabInternal: {fileID: 1609685540}
+--- !u!64 &312629583
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 312629580}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!1 &1038120646
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +355,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1059826727 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100004, guid: 82aa5a658a21b5a41a244586ac7adb44, type: 3}
+  m_PrefabInternal: {fileID: 1609685540}
+--- !u!64 &1059826731
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1059826727}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 82aa5a658a21b5a41a244586ac7adb44, type: 3}
 --- !u!1 &1235809769
 GameObject:
   m_ObjectHideFlags: 0
