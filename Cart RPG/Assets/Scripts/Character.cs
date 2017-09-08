@@ -23,4 +23,4 @@ public class Character : MonoBehaviour {
     public List<Item> inventoryItems;
 }
 
-public enum Race { Human, Elf, Orc, Dwarf }
+public enum Race { Human, Elf, Orc, Dwarf, Goblin }
