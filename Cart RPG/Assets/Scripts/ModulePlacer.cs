@@ -48,14 +48,16 @@ public class ModulePlacer : MonoBehaviour {
         // Get the closest tile to the point the player is looking at
         Transform closestTile = getClosestTile(hit.point, gridScript.gridTiles.ToArray());
 
-        // Move preview of object that is to be placed to the closest grid point to where the player is aiming
-        ghostModule.transform.parent = closestTile.parent;
-        ghostModule.transform.position = closestTile.position;
-        ghostModule.transform.rotation = closestTile.rotation;
-        ghostModule.transform.Rotate(new Vector3(-90, 0, moduleRotation * 90));
+        if (ghostModule != null) {
+            // Move preview of object that is to be placed to the closest grid point to where the player is aiming
+            ghostModule.transform.parent = closestTile.parent;
+            ghostModule.transform.position = closestTile.position;
+            ghostModule.transform.rotation = closestTile.rotation;
+            ghostModule.transform.Rotate(new Vector3(-90, 0, moduleRotation * 90));
 
-        if (Input.GetButtonUp("Fire1")) {
-            Instantiate(Modules[ModuleIndex], ghostModule.transform.position, ghostModule.transform.rotation, ghostModule.transform.parent);
+            if (Input.GetButtonUp("Fire1")) {
+                Instantiate(Modules[ModuleIndex], ghostModule.transform.position, ghostModule.transform.rotation, ghostModule.transform.parent);
+            }
         }
     }
 

@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 23646606835124266}
   - component: {fileID: 95509912043739136}
   - component: {fileID: 65925334830273382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: cartModuleCage2x2
-  m_TagString: Untagged
+  m_TagString: Cart Module
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1919758757066612}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 27.019062, y: 4.075643e-17, z: -10.476429}
+  m_LocalPosition: {x: 27.553516, y: 4.246003e-17, z: -12.586319}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,8 +92,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5000001, z: 0.5000001}
-  m_Center: {x: 0, y: 0, z: 0.25000006}
+  m_Size: {x: 1, y: 1.0000002, z: 0.9746301}
+  m_Center: {x: -0.25, y: -0.25000006, z: 0.5126852}
 --- !u!95 &95509912043739136
 Animator:
   serializedVersion: 3
