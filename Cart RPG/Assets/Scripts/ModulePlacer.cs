@@ -104,6 +104,8 @@ public class ModulePlacer : MonoBehaviour {
         foreach (GameObject tile in tiles) {
             if (tile.GetComponent<GridTile>().IsFree) {
                 float dist = Vector3.Distance(tile.transform.position, point);
+
+                //replace closest if new distance is closer
                 if (dist < minDist) {
                     closest = tile.transform;
                     minDist = dist;

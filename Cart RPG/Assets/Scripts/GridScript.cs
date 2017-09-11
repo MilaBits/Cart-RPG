@@ -19,10 +19,8 @@ public class GridScript : MonoBehaviour {
 
     void createGrid() {
 
-        for (int i = 0; i < NumberOfColumns; i++) {
-            //loop 1 to loop through columns
-            for (int j = 0; j < NumberOfRows; j++) {
-                //loop 2 to loop through rows
+        for (int i = 0; i < NumberOfColumns; i++) {  //Columns
+            for (int j = 0; j < NumberOfRows; j++) { //Rows
                 GameObject gridPiece = Instantiate(TheGridItem, new Vector3(i + tempSepX, 0, j + tempSepZ), Quaternion.identity);
                 gridPiece.transform.SetParent(transform, false);
                 tempSepZ += SeperationValueZ; //change the value of seperation between rows
