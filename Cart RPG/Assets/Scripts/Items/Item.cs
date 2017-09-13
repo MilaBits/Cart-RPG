@@ -1,35 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Boo.Lang;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Item : MonoBehaviour {
 
-    private string name;
-    private string description;
-    private int value;
-    private ItemType itemType;
+    [SerializeField] private string _Name;
+    [SerializeField] private string _Description;
+    [SerializeField] private Image _Image;
+    [SerializeField] private int _Value;
+    [SerializeField] private ItemType _ItemType;
 
     public Item(string name, string description, int value, ItemType itemType) {
 
-        this.name = name;
-        this.description = description;
-        this.value = value;
-        this.itemType = itemType;
+        this._Name = name;
+        this._Description = description;
+        this._Value = value;
+        this._ItemType = itemType;
     }
 
     public string Name {
-        get { return name; }
+        get { return _Name; }
     }
     public string Description {
-        get { return description; }
+        get { return _Description; }
     }
-
     public int Value {
-        get { return value; }
+        get { return _Value; }
     }
     public ItemType ItemType {
-        get { return itemType; }
+        get { return _ItemType; }
+    }
+    public Image Image {
+        get { return _Image; }
     }
 }
 

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     //camera variables
     public float lookSensitivity = 5;
     public float lookSmoothnes = 0.1f;
+    public float maxUseDistance = 1;
 
     private float yRotation;
     private float xRotation;
@@ -23,10 +24,12 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
+    private Camera camera;
 
     // Use this for initialization
     void Start() {
         controller = GetComponent<CharacterController>();
+        camera = GetComponentInChildren<Camera>();
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 
         CameraMovement();
         PlayerMovement();
+        PlayerInteract();
     }
 
     void CameraMovement() {
@@ -51,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 
         //Rotate character and camera
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
-        transform.GetChild(0).rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        camera.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
 
     }
 
@@ -69,5 +73,27 @@ public class PlayerController : MonoBehaviour {
         //move character
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
+    }
+
+    void PlayerInteract() {
+
+        if (Input.GetButtonUp("Use")) {
+
+            // Get the point the player is looking at
+            RaycastHit hit;
+            Ray ray = new Ray(camera.transform.position, camera.transform.forward);
+            if (Physics.Raycast(ray, out hit)) {
+                Debug.Log(hit.transform.name);
+
+                //make sure it's close enough to use
+                if (hit.distance < maxUseDistance) {
+                    Debug.DrawLine(camera.transform.position, hit.point, Color.green);
+                    
+                } else {
+                    Debug.DrawLine(camera.transform.position, hit.point, Color.red);
+                }
+            }
+
+        }
     }
 }
