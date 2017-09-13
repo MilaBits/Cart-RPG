@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
     //camera variables
     public float lookSensitivity = 5;
     public float lookSmoothnes = 0.1f;
-    public float maxUseDistance = 1;
+    public float maxUseDistance = 2f;
 
     private float yRotation;
     private float xRotation;
@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
     private Camera camera;
+    [SerializeField]
+    private Canvas InventoryUI;
 
     // Use this for initialization
     void Start() {
@@ -79,18 +81,27 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonUp("Use")) {
 
+            if (InventoryUI.enabled) {
+                InventoryUI.enabled = false;
+                
+                return;
+            }
             // Get the point the player is looking at
             RaycastHit hit;
             Ray ray = new Ray(camera.transform.position, camera.transform.forward);
             if (Physics.Raycast(ray, out hit)) {
-                Debug.Log(hit.transform.name);
+                Debug.Log("Trying to use " + hit.transform.name + " at " + hit.distance);
 
                 //make sure it's close enough to use
                 if (hit.distance < maxUseDistance) {
                     Debug.DrawLine(camera.transform.position, hit.point, Color.green);
-                    
+
+                    InventoryUI.enabled = true;
+                    InventoryUI.GetComponent<InventoryUI>().LoadInventory(hit.transform.gameObject.GetComponent<CartStorageModule>().Items);
+                    Debug.Log("InventoryUI enabled:" + InventoryUI.enabled);
                 } else {
                     Debug.DrawLine(camera.transform.position, hit.point, Color.red);
+                    Debug.Log("Too far!");
                 }
             }
 

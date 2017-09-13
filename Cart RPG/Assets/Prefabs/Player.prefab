@@ -205,10 +205,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookSensitivity: 5
   lookSmoothnes: 0.1
+  maxUseDistance: 2
   walkSpeed: 6
   jumpSpeed: 8
   runSpeed: 8
   gravity: 20
+  InventoryUI: {fileID: 0}
 --- !u!114 &114670034671020616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +229,7 @@ MonoBehaviour:
   Modules:
   - {fileID: 1913448837862008, guid: 4ee639ed7f3f09647923fa94849f73f7, type: 2}
   - {fileID: 1010019300914696, guid: f10835e11b0b0404da9ba8246fcfcece, type: 2}
-  - {fileID: 1167721917692088, guid: 6186eaad545cb5242a00746826ca060f, type: 2}
+  - {fileID: 1887082860749882, guid: 14fb3220f27af9841b5f5927cee78b3a, type: 2}
   - {fileID: 1919758757066612, guid: 9447d27b17d01ad42b2cc7a5c368cb07, type: 2}
   - {fileID: 1680872258738698, guid: 2951ed721e3ace74799bfd4f71dfe201, type: 2}
   ghostMaterial: {fileID: 2100000, guid: fcd9fd7b49f4aba4092e485e6fab726b, type: 2}

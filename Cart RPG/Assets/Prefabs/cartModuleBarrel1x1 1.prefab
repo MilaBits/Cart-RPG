@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 65250951234663436}
   - component: {fileID: 23196136296681320}
   - component: {fileID: 33333313407290658}
+  - component: {fileID: 114991076511996274}
   m_Layer: 8
   m_Name: cartModuleBarrel1x1 1
   m_TagString: Cart Module
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1887082860749882}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 20.498, y: 3.115, z: -13.489554}
+  m_LocalPosition: {x: 19.321, y: -0, z: -2.871}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,3 +113,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114991076511996274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1887082860749882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4ac7b959a620f4989ce1a594df1e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: Barrel
+  _Size: 1x1
+  _Capacity: 1
+  _Items: []

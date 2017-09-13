@@ -8,7 +8,7 @@ public class Item : MonoBehaviour {
 
     [SerializeField] private string _Name;
     [SerializeField] private string _Description;
-    [SerializeField] private Image _Image;
+    [SerializeField] private Sprite _Sprite;
     [SerializeField] private int _Value;
     [SerializeField] private ItemType _ItemType;
 
@@ -32,8 +32,8 @@ public class Item : MonoBehaviour {
     public ItemType ItemType {
         get { return _ItemType; }
     }
-    public Image Image {
-        get { return _Image; }
+    public Sprite Sprite {
+        get { return _Sprite; }
     }
 }
 

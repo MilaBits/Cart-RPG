@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23025732436914574}
   - component: {fileID: 95270910358723534}
   - component: {fileID: 65424800129861686}
+  - component: {fileID: 114034851958736478}
   m_Layer: 8
   m_Name: cartModuleCrate1x1
   m_TagString: Cart Module
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1913448837862008}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 26.773167, y: 3.7825295e-17, z: -6.846245}
+  m_LocalPosition: {x: 17.873, y: 0, z: -3.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,3 +112,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114034851958736478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1913448837862008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4ac7b959a620f4989ce1a594df1e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: Crate
+  _Size: 1x1
+  _Capacity: 12
+  _Items: []

@@ -41,7 +41,7 @@ public class ModulePlacer : MonoBehaviour {
         RaycastHit hit;
         Ray ray = new Ray(camera.transform.position, camera.transform.forward);
         if (Physics.Raycast(ray, out hit)) {
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
             Debug.DrawLine(camera.transform.position, hit.point, Color.red);
         }
 
