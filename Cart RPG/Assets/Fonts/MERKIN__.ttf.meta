@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 7475017d62bbe6e45b0947b2318aff94
+timeCreated: 1505409630
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Merkin
+  fontNames:
+  - Merkin
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

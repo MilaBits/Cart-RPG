@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 334241e3ef7944c46a90584f1d83512d
+timeCreated: 1505408263
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Caprica Sans Personal Use
+  fontNames:
+  - Caprica Sans Personal Use
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
