@@ -7,8 +7,8 @@ public class Consumable : Item {
     private int manaRecovery;
 
 
-    public Consumable(string name, string description, int value, ItemType itemType, int healthRecovery, int manaRecovery)
-        : base(name, description, value, itemType) {
+    public Consumable(string title, string description, int value, ItemType itemType, int healthRecovery, int manaRecovery)
+        : base(title, description, value, itemType) {
 
         this.healthRecovery = healthRecovery;
         this.manaRecovery = manaRecovery;

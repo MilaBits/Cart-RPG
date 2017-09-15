@@ -14,8 +14,8 @@ public class Weapon : Item {
         get { return damageType; }
     }
 
-    public Weapon(string name, string description, int value, ItemType itemType, int damage, DamageType damageType)
-        : base(name, description, value, itemType) {
+    public Weapon(string title, string description, int value, ItemType itemType, int damage, DamageType damageType)
+        : base(title, description, value, itemType) {
 
         this.damage = damage;
         this.damageType = damageType;

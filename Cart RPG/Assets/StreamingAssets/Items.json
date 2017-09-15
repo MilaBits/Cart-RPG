@@ -1,12 +1,17 @@
 [
 	{
 			"id": 0,
-			"title": "itemname",
-			"description": "description",
+			"type",
+			"title": "Wooden Dagger",
+			"description": "bla bla wooden dagger stabby stabby",
 			"value": 7,
 			
 	},
 	{
-
+			"id": 1,
+			"title": "Steel Dagger",
+			"description": "bla bla steel dagger stabby stabby murder kill",
+			"value": 42,
+			
 	}
 ]

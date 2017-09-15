@@ -9,8 +9,8 @@ public class Armor : Item {
     private int bonusIntelligence;
     private int bonusMovementSpeed;
 
-    public Armor(string name, string description, int value, ItemType itemType, int bonusArmor, int bonusVitality, int bonusStrength, int bonusIntelligence, int bonusMovementSpeed)
-        : base(name, description, value, itemType) {
+    public Armor(string title, string description, int value, ItemType itemType, int bonusArmor, int bonusVitality, int bonusStrength, int bonusIntelligence, int bonusMovementSpeed)
+        : base(title, description, value, itemType) {
 
         this.bonusArmor = bonusArmor;
         this.bonusVitality = bonusVitality;

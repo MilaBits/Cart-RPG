@@ -30,7 +30,7 @@ public class InventoryUI : MonoBehaviour {
         foreach (Transform itemSlot in itemContainer.transform) {
             if (items[i] != null) {
                 itemSlot.GetComponent<Image>().sprite = items[i].Sprite;
-                itemSlot.GetComponentInChildren<Text>().text = items[i].Name;
+                itemSlot.GetComponentInChildren<Text>().text = items[i].Title;
                 i++;
                 continue;
             }
