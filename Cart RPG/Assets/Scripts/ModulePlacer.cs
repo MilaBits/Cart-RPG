@@ -29,7 +29,7 @@ public class ModulePlacer : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        text = buildUi.GetComponentInChildren<Text>();
+        text = buildUi.GetComponentsInChildren<Text>()[1];
         gridScript = grid.GetComponent<GridScript>();
     }
 
@@ -79,7 +79,7 @@ public class ModulePlacer : MonoBehaviour {
             }
 
             // Update UI to show what item is picked
-            text.text = Modules[ModuleIndex].name;
+            text.text = Modules[ModuleIndex].GetComponent<CartModule>().ToString();
 
             // Replace and set up ghost image of selected item
             Destroy(ghostModule);

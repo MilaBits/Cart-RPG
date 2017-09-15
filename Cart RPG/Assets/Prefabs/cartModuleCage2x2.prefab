@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23646606835124266}
   - component: {fileID: 95509912043739136}
   - component: {fileID: 65925334830273382}
+  - component: {fileID: 114935982061367050}
   m_Layer: 8
   m_Name: cartModuleCage2x2
   m_TagString: Cart Module
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1919758757066612}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 27.008778, y: 3.9590012e-17, z: -9.031826}
+  m_LocalPosition: {x: 18.747572, y: 0.17107302, z: -1.6550171}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,3 +112,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114935982061367050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1919758757066612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c9c0308d9801947b22fc2ce5a54e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Name: Small Cage
+  _Size: 2x2

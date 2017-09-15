@@ -22,6 +22,6 @@ public class CartModule : MonoBehaviour {
     }
 
     public override string ToString() {
-        return Name;
+        return Name + " " + Size;
     }
 }
