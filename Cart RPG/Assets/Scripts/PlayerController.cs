@@ -32,10 +32,16 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         controller = GetComponent<CharacterController>();
         camera = GetComponentInChildren<Camera>();
+
     }
 
     // Update is called once per frame
     void Update() {
+
+        //keep cursor in game window
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
 
         CameraMovement();
         PlayerMovement();
