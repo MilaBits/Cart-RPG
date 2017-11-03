@@ -19,9 +19,17 @@ public class Item : MonoBehaviour {
     [SerializeField]
     private ItemType _ItemType;
 
-    public Item(int id, string title, string description, int value, ItemType itemType) {
+    public Item(int id, string title, string description, int value, ItemType itemType)
+    {
 
         this._Id = id;
+        this._Title = title;
+        this._Description = description;
+        this._Value = value;
+        this._ItemType = itemType;
+    }
+    public Item(string title, string description, int value, ItemType itemType)
+    {
         this._Title = title;
         this._Description = description;
         this._Value = value;
