@@ -16,11 +16,11 @@ public class ItemDatabase : MonoBehaviour {
     }
 
     void ConstructItemDatabase() {
-        for (int i = 0; i < itemData.Count; i++) {
-            switch (itemData[i]["type"]) {
-                case ""
-            }
-            itemDatabase.Add(new Item(itemData[i]["id"], itemData[i]["title"], itemData[i]["description"], itemData[i]["value"], itemData[i]));
-        }
+        //for (int i = 0; i < itemData.Count; i++) {
+        //    switch (itemData[i]["type"]) {
+        //        case ""
+        //    }
+        //    itemDatabase.Add(new Item(itemData[i]["id"], itemData[i]["title"], itemData[i]["description"], itemData[i]["value"], itemData[i]));
+        //}
     }
 }
