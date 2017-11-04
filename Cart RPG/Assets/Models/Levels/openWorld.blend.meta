@@ -49,6 +49,7 @@ ModelImporter:
     100082: RoadSides_009
     100084: RoadSideCap1
     100086: RoadSideCap2
+    100088: Plane
     400000: BezierHillSide
     400002: BezierHillSide_001
     400004: bezierRoad
@@ -93,6 +94,7 @@ ModelImporter:
     400082: RoadSides_009
     400084: RoadSideCap1
     400086: RoadSideCap2
+    400088: Plane
     2300000: BezierHillSide
     2300002: BezierHillSide_001
     2300004: bezierRoad
@@ -136,6 +138,7 @@ ModelImporter:
     2300080: RoadSides_009
     2300082: RoadSideCap1
     2300084: RoadSideCap2
+    2300086: Plane
     3300000: BezierHillSide
     3300002: BezierHillSide_001
     3300004: bezierRoad
@@ -179,6 +182,7 @@ ModelImporter:
     3300080: RoadSides_009
     3300082: RoadSideCap1
     3300084: RoadSideCap2
+    3300086: Plane
     4300000: Road
     4300002: bezierRoad
     4300004: RoadSides
@@ -222,6 +226,7 @@ ModelImporter:
     4300080: RoadSides_009
     4300082: RoadSideCap1
     4300084: RoadSideCap2
+    4300086: Plane
     7400000: Default Take
     9500000: //RootNode
   materials:
