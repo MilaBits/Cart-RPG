@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class Object2Terrain : EditorWindow {
 
-    [MenuItem("Terrain/Object to Terrain", false, 2000)]
+    [MenuItem("Custom Tools/Object to Terrain", false, 2000)]
     static void OpenWindow() {
 
         EditorWindow.GetWindow<Object2Terrain>(true);
