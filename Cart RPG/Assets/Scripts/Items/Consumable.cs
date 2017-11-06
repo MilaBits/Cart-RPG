@@ -7,11 +7,14 @@ public class Consumable : Item {
     private int manaRecovery;
 
 
-    public Consumable(string title, string description, int value, ItemType itemType, int healthRecovery, int manaRecovery)
-        : base(title, description, value, itemType) {
+    public Consumable(int id, string title, string description, int value, ItemType itemType, string spritePath, bool stackable, int healthRecovery, int manaRecovery)
+        : base(id, title, description, value, itemType, spritePath, stackable) {
 
         this.healthRecovery = healthRecovery;
         this.manaRecovery = manaRecovery;
+    }
+    public Consumable() {
+
     }
 
     public int HealthRecovery {

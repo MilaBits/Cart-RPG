@@ -4,62 +4,80 @@ using Boo.Lang;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class Item {
+    [SerializeField]
+    private int id;
+    [SerializeField]
+    private string title;
+    [SerializeField]
+    private string description;
+    [SerializeField]
+    private string spritePath;
+    [SerializeField]
+    private int itemValue;
+    [SerializeField]
+    private ItemType itemType;
+    [SerializeField]
+    private bool stackable;
+    [SerializeField]
+    private Sprite sprite;
 
-    [SerializeField]
-    private int _Id;
-    [SerializeField]
-    private string _Title;
-    [SerializeField]
-    private string _Description;
-    [SerializeField]
-    private Sprite _Sprite;
-    [SerializeField]
-    private int _Value;
-    [SerializeField]
-    private ItemType _ItemType;
+    public Item(int id, string title, string description, int value, ItemType itemType, string spritePath, bool stackable) {
 
-    public Item(int id, string title, string description, int value, ItemType itemType)
-    {
-
-        this._Id = id;
-        this._Title = title;
-        this._Description = description;
-        this._Value = value;
-        this._ItemType = itemType;
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.itemValue = value;
+        this.itemType = itemType;
+        this.spritePath = spritePath;
+        this.stackable = stackable;
+        this.sprite = Resources.Load<Sprite>("Sprites/Items/" + spritePath);
     }
-    public Item(string title, string description, int value, ItemType itemType)
-    {
-        this._Title = title;
-        this._Description = description;
-        this._Value = value;
-        this._ItemType = itemType;
+    public Item(string title, string description, int value, ItemType itemType, string spritePath, bool stackable) {
+        this.title = title;
+        this.description = description;
+        this.itemValue = value;
+        this.itemType = itemType;
+        this.spritePath = spritePath;
+        this.stackable = stackable;
+    }
+
+    public Item() {
+        this.id = -1;
     }
 
     public int Id {
-        get { return _Id; }
-        private set { _Id = value; }
+        get { return id; }
+        private set { id = value; }
     }
     public string Title {
-        get { return _Title; }
-        private set { _Title = value; }
+        get { return title; }
+        private set { title = value; }
     }
     public string Description {
-        get { return _Description; }
-        private set { _Description = value; }
+        get { return description; }
+        private set { description = value; }
     }
     public int Value {
-        get { return _Value; }
-        private set { _Value = value; }
+        get { return itemValue; }
+        private set { itemValue = value; }
     }
     public ItemType ItemType {
-        get { return _ItemType; }
-        private set { _ItemType = value; }
+        get { return itemType; }
+        private set { itemType = value; }
+    }
+    public string SpritePath {
+        get { return spritePath; }
+        private set { spritePath = value; }
+    }
+    public bool Stackable {
+        get { return stackable; }
+        private set { stackable = value; }
     }
     public Sprite Sprite {
-        get { return _Sprite; }
-        private set { _Sprite = value; }
+        get { return sprite; }
+        private set { sprite = value; }
     }
 }
 
-public enum ItemType { MeleeWeapon, RangedWeapon, MagicalWeapon, Misc, Consumable }
+public enum ItemType { Weapon, Armor, Consumable, Junk }

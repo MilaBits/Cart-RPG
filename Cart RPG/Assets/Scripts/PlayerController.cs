@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
     void Update() {
 
         //keep cursor in game window
-        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && InventoryUI.enabled == false) {
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -49,7 +49,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void CameraMovement() {
-
+        if (InventoryUI.enabled) {
+            return;
+        }
         //Get mouse movements
         yRotation += Input.GetAxis("Mouse X") * lookSensitivity;
         xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
@@ -89,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 
             if (InventoryUI.enabled) {
                 InventoryUI.enabled = false;
-                
+
                 return;
             }
             // Get the point the player is looking at
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour {
                     Debug.DrawLine(camera.transform.position, hit.point, Color.green);
 
                     InventoryUI.enabled = true;
+                    Cursor.lockState = CursorLockMode.None;
                     InventoryUI.GetComponent<InventoryUI>().LoadInventory(hit.transform.gameObject.GetComponent<CartStorageModule>().Items);
                     Debug.Log("InventoryUI enabled:" + InventoryUI.enabled);
                 } else {

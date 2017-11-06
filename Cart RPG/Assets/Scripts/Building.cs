@@ -10,6 +10,9 @@ public class Building : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        if (GameObject.Find("Town") == null) {
+            return;
+        }
 
         //debug: For debugging, only work for the well model
         //if (gameObject.name.Contains("Building")) {
