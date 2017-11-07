@@ -1,16 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework.Internal.Commands;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler {
     public Item item;
     public int amount = 1;
+    public int slot;
+    
+    private Inventory inventory;
+    private ToolTip tooltip;
+
+    public void Start()
+    {
+        inventory = transform.parent.parent.parent.GetComponent<Inventory>();
+        tooltip = inventory.GetComponent<ToolTip>();
+    }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        if (item != null) {
+        if (item != null)
+        {
+            this.transform.SetParent(this.transform.parent.parent);
             this.transform.position = eventData.position;
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
     }
 
@@ -20,6 +30,18 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData) {
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        this.transform.SetParent(inventory.slots[slot].transform);
+        this.transform.position = inventory.slots[slot].transform.position;
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        tooltip.Activate(item);
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        tooltip.Deactivate();
     }
 }

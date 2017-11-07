@@ -33,7 +33,7 @@ public class Armor : Item {
     public int BonusStrength {
         get { return bonusStrength; }
     }
-    public int BbonusIntelligence {
+    public int BonusIntelligence {
         get { return bonusIntelligence; }
     }
     public int BonusMovementSpeed {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework.Constraints;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,17 +22,19 @@ public class Inventory : MonoBehaviour {
             items.Add(new Item());
             slots.Add(Instantiate(inventorySlot));
             slots[i].transform.SetParent(slotPanel.transform);
+            slots[i].transform.localScale = new Vector3(1, 1, 1);
+            slots[i].GetComponent<InventorySlot>().id = i;
         }
 
         AddItem(0);
+        AddItem(0);
+        AddItem(0);
+        AddItem(0);
+        AddItem(3);
         AddItem(1);
         AddItem(2);
+        AddItem(3);
         AddItem(2);
-        AddItem(2);
-        AddItem(2);
-
-        //Debug.Log(slots[0].transform.GetChild(0).GetComponent<ItemData>() + " itemData.item: " + slots[0].transform.GetChild(0).GetComponent<ItemData>().Item.Title);
-        //Debug.Log(slots[1].transform.GetChild(0).GetComponent<ItemData>() + " itemData.item: " + slots[1].transform.GetChild(0).GetComponent<ItemData>().Item.Title);
     }
 
     public void AddItem(int id) {
@@ -55,14 +55,16 @@ public class Inventory : MonoBehaviour {
                     items[i] = itemToAdd;
                     GameObject itemObject = Instantiate(inventoryItem);
 
+                    ItemData data = itemObject.GetComponent<ItemData>();
+                    data.item = itemToAdd;
+                    data.amount = 1;
+                    data.slot = i;
+
                     itemObject.transform.SetParent(slots[i].transform);
+                    itemObject.transform.localScale = new Vector3(1, 1, 1);
                     itemObject.transform.position = Vector2.zero;
                     itemObject.GetComponent<Image>().sprite = itemToAdd.Sprite;
                     itemObject.name = itemToAdd.Title;
-
-                    //itemObject.GetComponent<ItemData>().Item = itemToAdd;
-                    itemObject.GetComponent<ItemData>().item = itemToAdd;
-                    //Debug.Log(itemObject.GetComponent<ItemData>() + " itemData.item: " + itemObject.GetComponent<ItemData>().Item.Title);
                     break;
                 }
             }

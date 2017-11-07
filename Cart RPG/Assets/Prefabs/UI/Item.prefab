@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 222429755857937800}
   - component: {fileID: 114776435598755674}
   - component: {fileID: 114944893477267004}
+  - component: {fileID: 114475283589099456}
+  - component: {fileID: 225820364605827938}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -80,6 +82,25 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 0
   m_Text: 
+--- !u!114 &114475283589099456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1467020055341368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &114776435598755674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -132,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971aaa962e1ac374492494bd711e7cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
   amount: 1
+  slot: 0
 --- !u!222 &222429755857937800
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -183,3 +204,14 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000034809, y: -0.00000095367}
   m_SizeDelta: {x: 108.2, y: 99.15}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225820364605827938
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1467020055341368}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
