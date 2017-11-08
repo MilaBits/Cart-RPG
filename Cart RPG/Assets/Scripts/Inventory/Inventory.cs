@@ -6,6 +6,7 @@ public class Inventory : MonoBehaviour {
     private GameObject inventoryPanel;
     private GameObject slotPanel;
     private ItemDatabase itemDatabase;
+    public GameObject UI;
     public GameObject inventorySlot;
     public GameObject inventoryItem;
 
@@ -15,8 +16,10 @@ public class Inventory : MonoBehaviour {
 
     void Start() {
         itemDatabase = GameObject.Find("Game").GetComponent<ItemDatabase>();
-        inventoryPanel = GameObject.Find("PlayerInventory");
-        slotPanel = inventoryPanel.transform.Find("SlotContainer").gameObject;
+        //inventoryPanel = GameObject.Find("PlayerInventory");
+        if (transform.Find("SlotContainer").gameObject == null)
+            Debug.Log(name + ": no child object called SlotContainer");
+        slotPanel = transform.Find("SlotContainer").gameObject;
 
         for (int i = 0; i < slotAmount; i++) {
             items.Add(new Item());

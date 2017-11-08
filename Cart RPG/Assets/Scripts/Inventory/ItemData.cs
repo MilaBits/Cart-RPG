@@ -12,7 +12,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void Start()
     {
         inventory = transform.parent.parent.parent.GetComponent<Inventory>();
-        tooltip = inventory.GetComponent<ToolTip>();
+        tooltip = GameObject.Find("Game").GetComponent<ToolTip>();
     }
 
     public void OnBeginDrag(PointerEventData eventData) {

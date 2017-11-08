@@ -5,7 +5,7 @@ public class CartStorageModule : CartModule {
 
     [SerializeField] private int _Capacity;
     [SerializeField] private List<Item> _Items;
-
+    
     public int Capacity {
         get { return _Capacity; }
         private set { _Capacity = value; }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     //camera variables
     public float lookSensitivity = 5;
@@ -26,20 +27,27 @@ public class PlayerController : MonoBehaviour {
     private CharacterController controller;
     private Camera camera;
     [SerializeField]
-    private Canvas InventoryUI;
+
+    private GameObject PlayerInventory;
+    private GameObject ObjectInventory;
+    private
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
+        PlayerInventory = GameObject.Find("PlayerInventory");
         controller = GetComponent<CharacterController>();
         camera = GetComponentInChildren<Camera>();
 
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
         //keep cursor in game window
-        if (Input.GetKeyDown(KeyCode.Mouse0) && InventoryUI.enabled == false) {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && PlayerInventory.activeSelf == false)
+        {
             Cursor.lockState = CursorLockMode.Locked;
         }
 
@@ -48,8 +56,10 @@ public class PlayerController : MonoBehaviour {
         PlayerInteract();
     }
 
-    void CameraMovement() {
-        if (InventoryUI.enabled) {
+    void CameraMovement()
+    {
+        if (PlayerInventory.activeSelf)
+        {
             return;
         }
         //Get mouse movements
@@ -69,10 +79,12 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void PlayerMovement() {
+    void PlayerMovement()
+    {
 
         //make sure player isn't jumping
-        if (controller.isGrounded) {
+        if (controller.isGrounded)
+        {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= walkSpeed;
@@ -85,30 +97,42 @@ public class PlayerController : MonoBehaviour {
         controller.Move(moveDirection * Time.deltaTime);
     }
 
-    void PlayerInteract() {
+    void PlayerInteract()
+    {
 
-        if (Input.GetButtonUp("Use")) {
+        if (Input.GetButtonUp("Inventory"))
+        {
+            PlayerInventory.SetActive(!PlayerInventory.activeSelf);
+        }
 
-            if (InventoryUI.enabled) {
-                InventoryUI.enabled = false;
+        if (Input.GetButtonUp("Use"))
+        {
+
+            if (PlayerInventory.activeSelf)
+            {
+                PlayerInventory.SetActive(false);
 
                 return;
             }
             // Get the point the player is looking at
             RaycastHit hit;
             Ray ray = new Ray(camera.transform.position, camera.transform.forward);
-            if (Physics.Raycast(ray, out hit)) {
+            if (Physics.Raycast(ray, out hit))
+            {
                 Debug.Log("Trying to use " + hit.transform.name + " at " + hit.distance);
 
                 //make sure it's close enough to use
-                if (hit.distance < maxUseDistance) {
+                if (hit.distance < maxUseDistance)
+                {
                     Debug.DrawLine(camera.transform.position, hit.point, Color.green);
 
-                    InventoryUI.enabled = true;
+                    PlayerInventory.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
-                    InventoryUI.GetComponent<InventoryUI>().LoadInventory(hit.transform.gameObject.GetComponent<CartStorageModule>().Items);
-                    Debug.Log("InventoryUI enabled:" + InventoryUI.enabled);
-                } else {
+                    //PlayerInventory.GetComponent<InventoryUI>().LoadInventory(hit.transform.gameObject.GetComponent<CartStorageModule>().Items);
+                    Debug.Log("InventoryUI enabled:" + PlayerInventory.activeSelf);
+                }
+                else
+                {
                     Debug.DrawLine(camera.transform.position, hit.point, Color.red);
                     Debug.Log("Too far!");
                 }
