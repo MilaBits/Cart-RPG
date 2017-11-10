@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
 
     //camera variables
     public float lookSensitivity = 5;
@@ -28,40 +27,42 @@ public class PlayerController : MonoBehaviour
     private Camera camera;
     [SerializeField]
 
-    private GameObject PlayerInventory;
-    private GameObject ObjectInventory;
-    private
+    private GameObject PlayerInventoryCanvas;
+    private Inventory PlayerInventory;
+    private int playerInventoryId = 1;
+    private GameObject ObjectInventoryCanvas;
+    //private int objectInventoryId = 2; TODO: MAKE UI IT'S OWN CONTROLLER!
+
+    private ItemDatabase itemDatabase;
 
     // Use this for initialization
-    void Start()
-    {
-        PlayerInventory = GameObject.Find("PlayerInventory");
+    void Start() {
+        PlayerInventoryCanvas = GameObject.Find("PlayerInventoryCanvas");
+        PlayerInventory = PlayerInventoryCanvas.transform.GetChild(0).GetComponent<Inventory>();
+        ObjectInventoryCanvas = GameObject.Find("ObjectInventoryCanvas");
+        itemDatabase = GameObject.Find("Game").GetComponent<ItemDatabase>();
         controller = GetComponent<CharacterController>();
         camera = GetComponentInChildren<Camera>();
-
+        PlayerInventory.LoadItemsFromDatabase(playerInventoryId);
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
         //keep cursor in game window
-        if (Input.GetKeyDown(KeyCode.Mouse0) && PlayerInventory.activeSelf == false)
-        {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && PlayerInventoryCanvas.activeSelf == false) {
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        CameraMovement();
-        PlayerMovement();
+        if (!PlayerInventoryCanvas.activeSelf && !ObjectInventoryCanvas.activeSelf) {
+            CameraMovement();
+            PlayerMovement();
+        }
         PlayerInteract();
     }
 
-    void CameraMovement()
-    {
-        if (PlayerInventory.activeSelf)
-        {
-            return;
-        }
+    void CameraMovement() {
+
         //Get mouse movements
         yRotation += Input.GetAxis("Mouse X") * lookSensitivity;
         xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
@@ -79,12 +80,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void PlayerMovement()
-    {
+    void PlayerMovement() {
 
         //make sure player isn't jumping
-        if (controller.isGrounded)
-        {
+        if (controller.isGrounded) {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= walkSpeed;
@@ -97,44 +96,42 @@ public class PlayerController : MonoBehaviour
         controller.Move(moveDirection * Time.deltaTime);
     }
 
-    void PlayerInteract()
-    {
+    void PlayerInteract() {
 
-        if (Input.GetButtonUp("Inventory"))
-        {
-            PlayerInventory.SetActive(!PlayerInventory.activeSelf);
+        if (Input.GetButtonUp("Inventory")) {
+            PlayerInventoryCanvas.SetActive(!PlayerInventoryCanvas.activeSelf);
         }
 
-        if (Input.GetButtonUp("Use"))
-        {
+        if (Input.GetButtonUp("Use")) {
 
-            if (PlayerInventory.activeSelf)
-            {
-                PlayerInventory.SetActive(false);
+            //hide inventories if they are currently shown
+            if (PlayerInventoryCanvas.activeSelf || ObjectInventoryCanvas.activeSelf) {
+                PlayerInventoryCanvas.SetActive(false);
 
+                itemDatabase.SaveItemsToStorage(playerInventoryId, PlayerInventory.items, PlayerInventory.getItemAmounts());
+
+                ObjectInventoryCanvas.SetActive(false);
                 return;
             }
+
             // Get the point the player is looking at
             RaycastHit hit;
             Ray ray = new Ray(camera.transform.position, camera.transform.forward);
-            if (Physics.Raycast(ray, out hit))
-            {
-                Debug.Log("Trying to use " + hit.transform.name + " at " + hit.distance);
+            if (Physics.Raycast(ray, out hit)) {
+                //Debug.Log("Trying to use " + hit.transform.name + " at " + hit.distance);
 
                 //make sure it's close enough to use
-                if (hit.distance < maxUseDistance)
-                {
-                    Debug.DrawLine(camera.transform.position, hit.point, Color.green);
+                if (hit.distance < maxUseDistance && hit.transform.GetComponent<CartStorageModule>() != null) {
+                    //Debug.DrawLine(camera.transform.position, hit.point, Color.green);
 
-                    PlayerInventory.SetActive(true);
+                    PlayerInventoryCanvas.SetActive(true);
+                    ObjectInventoryCanvas.SetActive(true);
                     Cursor.lockState = CursorLockMode.None;
-                    //PlayerInventory.GetComponent<InventoryUI>().LoadInventory(hit.transform.gameObject.GetComponent<CartStorageModule>().Items);
-                    Debug.Log("InventoryUI enabled:" + PlayerInventory.activeSelf);
-                }
-                else
-                {
-                    Debug.DrawLine(camera.transform.position, hit.point, Color.red);
-                    Debug.Log("Too far!");
+                    //PlayerInventoryCanvas.GetComponent<InventoryUI>().LoadInventory(hit.transform.gameObject.GetComponent<CartStorageModule>().Items);
+                    //Debug.Log("InventoryUI enabled:" + PlayerInventoryCanvas.activeSelf);
+                } else {
+                    //Debug.DrawLine(camera.transform.position, hit.point, Color.red);
+                    //Debug.Log("Too far!");
                 }
             }
 

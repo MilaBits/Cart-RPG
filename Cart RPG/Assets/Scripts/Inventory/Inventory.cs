@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
-    private GameObject inventoryPanel;
     private GameObject slotPanel;
     private ItemDatabase itemDatabase;
     public GameObject UI;
@@ -19,7 +19,31 @@ public class Inventory : MonoBehaviour {
         //inventoryPanel = GameObject.Find("PlayerInventory");
         if (transform.Find("SlotContainer").gameObject == null)
             Debug.Log(name + ": no child object called SlotContainer");
+
         slotPanel = transform.Find("SlotContainer").gameObject;
+
+        Init();
+        //AddItem() here for testing
+        //AddItem(0, 0);
+        //AddItem(0, 4);
+        //AddItem(1, 2);
+
+    }
+
+    private void Init() {
+        if (slotPanel.transform.childCount > 0) {
+            foreach (Transform child in slotPanel.transform) {
+                try {
+                    //Destroy(child.GetChild(0).gameObject);
+                } catch (Exception ex) {
+                    Debug.Log("No child to destroy");
+                }
+                Destroy(child.gameObject);
+            }
+        }
+
+        items = new List<Item>();
+        slots = new List<GameObject>();
 
         for (int i = 0; i < slotAmount; i++) {
             items.Add(new Item());
@@ -29,15 +53,6 @@ public class Inventory : MonoBehaviour {
             slots[i].GetComponent<InventorySlot>().id = i;
         }
 
-        AddItem(0);
-        AddItem(0);
-        AddItem(0);
-        AddItem(0);
-        AddItem(3);
-        AddItem(1);
-        AddItem(2);
-        AddItem(3);
-        AddItem(2);
     }
 
     public void AddItem(int id) {
@@ -71,6 +86,67 @@ public class Inventory : MonoBehaviour {
                     break;
                 }
             }
+        }
+    }
+    public void AddItem(int id, int amount) {
+        Item addItem = itemDatabase.GetItemById(id);
+        List<Item> itemsToAdd = new List<Item>();
+        for (int addIndex = 0; addIndex < amount; addIndex++) {
+            itemsToAdd.Add(addItem);
+        }
+
+        foreach (Item itemToAdd in itemsToAdd) {
+            if (itemToAdd.Stackable && isInInventory(itemToAdd.Id)) {
+                for (int i = 0; i < items.Count; i++) {
+                    if (items[i].Id == id) {
+                        ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
+                        data.amount++;
+                        data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
+                        break;
+                    }
+                }
+            } else {
+                for (int i = 0; i < items.Count; i++) {
+                    if (items[i].Id == -1) {
+
+                        items[i] = itemToAdd;
+                        GameObject itemObject = Instantiate(inventoryItem);
+
+                        ItemData data = itemObject.GetComponent<ItemData>();
+                        data.item = itemToAdd;
+                        data.amount = 1;
+                        data.slot = i;
+
+                        itemObject.transform.SetParent(slots[i].transform);
+                        itemObject.transform.localScale = new Vector3(1, 1, 1);
+                        itemObject.transform.position = Vector2.zero;
+                        itemObject.GetComponent<Image>().sprite = itemToAdd.Sprite;
+                        itemObject.name = itemToAdd.Title;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public List<int> getItemAmounts() {
+        List<int> amounts = new List<int>();
+        for (int i = 0; i < items.Count; i++) {
+            try {
+                amounts.Add(slots[i].transform.GetChild(0).GetComponent<ItemData>().amount);
+            } catch {
+                amounts.Add(0);
+            }
+
+        }
+        return amounts;
+    }
+
+    public void LoadItemsFromDatabase(int id) {
+        Init();
+        Storage storage = itemDatabase.GetStorage(id);
+        foreach (var item in storage.items) {
+            AddItem(item.Key, item.Value);
         }
     }
 
