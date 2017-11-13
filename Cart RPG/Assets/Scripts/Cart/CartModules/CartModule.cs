@@ -25,14 +25,15 @@ public class CartModule : MonoBehaviour
         private set { _Id = value; }
     }
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     public override string ToString()
     {
         return Name + " " + Size;
+    }
+
+    public CartModule(string name, string size, int id)
+    {
+        _Name = name;
+        _Size = size;
+        _Id = id;
     }
 }

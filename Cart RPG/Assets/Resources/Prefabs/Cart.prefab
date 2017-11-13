@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 4964135199851242}
   - component: {fileID: 114396908710047278}
   - component: {fileID: 195266166471263012}
-  - component: {fileID: 114230496392092678}
   m_Layer: 0
   m_Name: Cart
   m_TagString: Untagged
@@ -97,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1290903919318070}
   m_LocalRotation: {x: -0, y: -0.043479204, z: -0, w: 0.9990544}
-  m_LocalPosition: {x: 21.02, y: 1.99, z: -12.89}
+  m_LocalPosition: {x: -25.65, y: 1.99, z: -12.380001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4715035110113300}
@@ -118,7 +117,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a51908764d9dd7645875905e5defedec, type: 2}
+  - {fileID: 2100000, guid: 2dde716b89b6a8a4abdfb0f539879758, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -173,21 +172,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114230496392092678
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1290903919318070}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 434870baf5525cb42afe567db98fb0d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridPosition: {x: 0, y: 1, z: 0}
-  gridLength: 2
-  gridWidth: 1
-  segments: 0
 --- !u!114 &114396908710047278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,8 +199,7 @@ MonoBehaviour:
   NumberOfRows: 6
   SeperationValueX: -0.5
   SeperationValueZ: -0.5
-  TheGridItem: {fileID: 1908261091723582, guid: 310e56f354732ce40b413e2277c8e083,
-    type: 2}
+  GridItem: {fileID: 1908261091723582, guid: 310e56f354732ce40b413e2277c8e083, type: 2}
   gridTiles: []
 --- !u!195 &195266166471263012
 NavMeshAgent:
@@ -227,7 +210,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

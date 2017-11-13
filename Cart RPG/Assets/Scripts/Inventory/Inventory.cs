@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     private GameObject slotPanel;
-    private ItemDatabase itemDatabase;
+    private JsonDatabase _jsonDatabase;
     public GameObject UI;
     public GameObject inventorySlot;
     public GameObject inventoryItem;
@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        itemDatabase = GameObject.Find("Game").GetComponent<ItemDatabase>();
+        _jsonDatabase = GameObject.Find("Game").GetComponent<JsonDatabase>();
         //inventoryPanel = GameObject.Find("PlayerInventory");
         if (transform.Find("SlotContainer").gameObject == null)
             Debug.Log(name + ": no child object called SlotContainer");
@@ -62,7 +62,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(int id)
     {
-        Item itemToAdd = itemDatabase.GetItemById(id);
+        Item itemToAdd = _jsonDatabase.GetItemById(id);
         if (itemToAdd.Stackable && isInInventory(itemToAdd.Id))
         {
             for (int i = 0; i < items.Count; i++)
@@ -103,7 +103,7 @@ public class Inventory : MonoBehaviour
     }
     public void AddItem(int id, int amount)
     {
-        Item addItem = itemDatabase.GetItemById(id);
+        Item addItem = _jsonDatabase.GetItemById(id);
         List<Item> itemsToAdd = new List<Item>();
         for (int addIndex = 0; addIndex < amount; addIndex++)
         {
@@ -173,7 +173,7 @@ public class Inventory : MonoBehaviour
     public void LoadItemsFromDatabase(int id)
     {
         Init(slotAmount);
-        Storage storage = itemDatabase.GetStorage(id);
+        Storage storage = _jsonDatabase.GetStorage(id);
         foreach (var item in storage.items)
         {
             AddItem(item.Key, item.Value);

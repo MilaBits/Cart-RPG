@@ -6,7 +6,8 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public int amount = 1;
     public int slot;
     
-    private Inventory inventory;
+    public Inventory inventory;
+    public Inventory Target;
     private ToolTip tooltip;
 
     public void Start()
@@ -18,7 +19,8 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData) {
         if (item != null)
         {
-            this.transform.SetParent(this.transform.parent.parent);
+            //Raise item in hierarchy so it remains on top of everything while dragging
+            this.transform.SetParent(this.transform.parent.parent.parent.parent);
             this.transform.position = eventData.position;
             GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
@@ -32,8 +34,9 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        this.transform.SetParent(inventory.slots[slot].transform);
-        this.transform.position = inventory.slots[slot].transform.position;
+        this.transform.SetParent(Target.slots[slot].transform);
+        this.transform.position = Target.slots[slot].transform.position;
+        this.inventory = Target;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 

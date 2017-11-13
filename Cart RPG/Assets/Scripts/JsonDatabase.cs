@@ -7,35 +7,33 @@ using System.Text;
 using UnityEngine;
 using LitJson;
 
-public class ItemDatabase : MonoBehaviour
+public class JsonDatabase : MonoBehaviour
 {
 
     private List<Item> itemDatabase = new List<Item>();
     private List<Storage> storageDatabase = new List<Storage>();
+    private List<ModuleData> moduleDatabase = new List<ModuleData>();
+
     private JsonData itemData = new JsonData();
     private JsonData storageData = new JsonData();
+    private JsonData moduleData = new JsonData();
 
     private string itemPath = "/StreamingAssets/Items.json";
     private string storagePath = "/StreamingAssets/Inventories.json";
-    private string storageTest = "/StreamingAssets/InventoriesTest.json";
+    private string modulePath = "/StreamingAssets/CartModules.json";
 
     // Use this for initialization
     void Start()
     {
-        itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + itemPath));
         ConstructItemDatabase();
-
-        storageData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + storagePath));
         ConstructStorageDatabase();
+        ConstructModuleDatabase();
     }
 
-    public Item GetItemById(int id)
-    {
-        return itemDatabase.Find(i => i.Id == id);
-    }
-
+    #region ItemDatabase
     private void ConstructItemDatabase()
     {
+        itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + itemPath));
         itemDatabase.Clear();
         for (int i = 0; i < itemData.Count; i++)
         {
@@ -46,26 +44,34 @@ public class ItemDatabase : MonoBehaviour
                         (string)itemData[i]["slug"], (bool)itemData[i]["stackable"],
                         (WeaponType)(int)itemData[i]["weaponType"], (int)itemData[i]["damage"], (DamageType)(int)itemData[i]["damageType"]));
                     break;
-                case ((int)ItemType.Armor):
+                case (int)ItemType.Armor:
                     itemDatabase.Add(new Armor((int)itemData[i]["id"], (string)itemData[i]["title"], (string)itemData[i]["description"], (int)itemData[i]["value"], (ItemType)(int)itemData[i]["type"],
                         (string)itemData[i]["slug"], (bool)itemData[i]["stackable"],
                         (ArmorSlot)(int)itemData[i]["armorSlot"], (int)itemData[i]["bonusArmor"], (int)itemData[i]["bonusVitality"], (int)itemData[i]["bonusStrength"], (int)itemData[i]["bonusIntelligence"], (int)itemData[i]["bonusMovementSpeed"]));
                     break;
-                case ((int)ItemType.Consumable):
+                case (int)ItemType.Consumable:
                     itemDatabase.Add(new Consumable((int)itemData[i]["id"], (string)itemData[i]["title"], (string)itemData[i]["description"], (int)itemData[i]["value"], (ItemType)(int)itemData[i]["type"],
                         (string)itemData[i]["slug"], (bool)itemData[i]["stackable"],
                         (int)itemData[i]["healthRecovery"], (int)itemData[i]["manaRecovery"]));
                     break;
-                case ((int)ItemType.Junk):
+                case (int)ItemType.Junk:
                     itemDatabase.Add(new Item((int)itemData[i]["id"], (string)itemData[i]["title"], (string)itemData[i]["description"], (int)itemData[i]["value"], (ItemType)(int)itemData[i]["type"],
                         (string)itemData[i]["slug"], (bool)itemData[i]["stackable"]));
                     break;
             }
         }
     }
+    public Item GetItemById(int id)
+    {
+        return itemDatabase.Find(i => i.Id == id);
+    }
 
+    #endregion
+
+    #region StorageDatabase
     private void ConstructStorageDatabase()
     {
+        storageData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + storagePath));
         storageDatabase.Clear();
         for (int i = 0; i < storageData.Count; i++)
         {
@@ -77,15 +83,9 @@ public class ItemDatabase : MonoBehaviour
             storageDatabase.Add(new Storage((int)storageData[i]["id"], items));
         }
     }
-
-
-    /// <summary>
-    /// Gets all items in the storage with the specified ID.
-    /// </summary>
-    /// <param name="id">storage ID</param>
-    /// <returns></returns>
     public Storage GetStorage(int id)
     {
+        ConstructStorageDatabase();
         for (int i = 0; i < storageDatabase.Count; i++)
         {
             if (storageDatabase[i].id == id)
@@ -191,4 +191,31 @@ public class ItemDatabase : MonoBehaviour
 
         File.WriteAllText(Application.dataPath + storagePath, sb.ToString());
     }
+    #endregion
+
+    #region ModuleDatabase
+    private void ConstructModuleDatabase()
+    {
+        moduleData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + modulePath));
+        moduleDatabase.Clear();
+
+        for (int i = 0; i < moduleData[0]["modules"].Count; i++)
+        {
+            moduleDatabase.Add(new ModuleData((int)moduleData[0]["modules"][i]["storageId"], (ModuleType)(int)moduleData[0]["modules"][i]["type"], (int)moduleData[0]["modules"][i]["position"], (int)moduleData[0]["modules"][i]["rotation"]));
+        }
+    }
+
+    public List<ModuleData> GetModules()
+    {
+        return moduleDatabase;
+    }
+
+    public void UpdateModuleDatabase(List<GameObject> modules)
+    {
+        ConstructModuleDatabase();
+        //TODO: Update module database
+
+    }
+
+    #endregion
 }

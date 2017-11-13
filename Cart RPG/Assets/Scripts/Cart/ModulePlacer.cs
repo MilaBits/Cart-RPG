@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ModulePlacer : MonoBehaviour
 {
+    private JsonDatabase jsonDatabase;
+    private List<GameObject> modules;
     private GameObject buildUI;
     private Camera camera;
 
@@ -28,10 +31,13 @@ public class ModulePlacer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        jsonDatabase = GameObject.Find("Game").GetComponent<JsonDatabase>();
         camera = Camera.main;
         buildUI = GameObject.Find("BuildUI");
         text = buildUI.GetComponentsInChildren<Text>()[1];
         gridScript = grid.GetComponent<GridScript>();
+
+        modules = gridScript.modules;
     }
 
     // Update is called once per frame
@@ -63,8 +69,11 @@ public class ModulePlacer : MonoBehaviour
             // Place module
             if (Input.GetButtonUp("Fire1"))
             {
-                Instantiate(Modules[ModuleIndex], ghostModule.transform.position, ghostModule.transform.rotation,
+                GameObject placedModule = Instantiate(Modules[ModuleIndex], ghostModule.transform.position, ghostModule.transform.rotation,
                     ghostModule.transform.parent);
+                
+                modules.Add(placedModule);
+                jsonDatabase.UpdateModuleDatabase(modules);
             }
             // Remove module
             if (Input.GetButtonUp("Fire2"))

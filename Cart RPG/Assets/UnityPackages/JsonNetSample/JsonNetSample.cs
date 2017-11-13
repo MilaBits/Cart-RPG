@@ -65,7 +65,7 @@ public class JsonNetSample : MonoBehaviour
     void TestJson()
     {
         WriteLine("* TestJson");
-        var json = "{\"Id\":51, \"Name\":\"padre\", \"Level\":0, \"Class\":\"Vampire\", \"Sex\":\"F\"}";
+        var json = "{\"StorageId\":51, \"Name\":\"padre\", \"Level\":0, \"Class\":\"Vampire\", \"Sex\":\"F\"}";
         var c = JsonConvert.DeserializeObject<CharacterListItem>(json);
         WriteLine(c.Id + " " + c.Name);
     }

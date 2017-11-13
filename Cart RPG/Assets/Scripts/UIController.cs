@@ -14,7 +14,7 @@ public class UIController : MonoBehaviour
     //Inventories
     private int playerStorageId = 0;
     private int objectStorageId = 0;
-    public ItemDatabase ItemDatabase { get; private set; }
+    public JsonDatabase JsonDatabase { get; private set; }
     private Inventory PlayerInventory;
     private Inventory ObjectInventory;
 
@@ -29,16 +29,16 @@ public class UIController : MonoBehaviour
         GameUI = transform.Find("GameUI").gameObject;
 
         //Inventories
-        ItemDatabase = GameObject.Find("Game").GetComponent<ItemDatabase>();
+        JsonDatabase = GameObject.Find("Game").GetComponent<JsonDatabase>();
         PlayerInventory = PlayerWindow.GetComponent<Inventory>();
         ObjectInventory = ObjectWindow.GetComponent<Inventory>();
-        
+
     }
-    
+
     public void HidePlayerInventory()
     {
         //save items
-        ItemDatabase.SaveItemsToStorage(playerStorageId, PlayerInventory.items, PlayerInventory.getItemAmounts());
+        JsonDatabase.SaveItemsToStorage(playerStorageId, PlayerInventory.items, PlayerInventory.getItemAmounts());
         //hide inventory
         PlayerWindow.SetActive(false);
         GameUI.SetActive(true);
@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
     public void HideObjectInventory()
     {
         //save items
-        ItemDatabase.SaveItemsToStorage(objectStorageId, ObjectInventory.items, ObjectInventory.getItemAmounts());
+        JsonDatabase.SaveItemsToStorage(objectStorageId, ObjectInventory.items, ObjectInventory.getItemAmounts());
         //hide inventory
         ObjectWindow.SetActive(false);
         GameUI.SetActive(true);

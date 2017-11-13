@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1913448837862008}
+  m_RootGameObject: {fileID: 1887082860749882}
   m_IsPrefabParent: 1
---- !u!1 &1913448837862008
+--- !u!1 &1887082860749882
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4280548385143474}
-  - component: {fileID: 33786263506858070}
-  - component: {fileID: 23025732436914574}
-  - component: {fileID: 95270910358723534}
-  - component: {fileID: 65424800129861686}
-  - component: {fileID: 114034851958736478}
+  - component: {fileID: 4795729140639940}
+  - component: {fileID: 95581689056981332}
+  - component: {fileID: 65250951234663436}
+  - component: {fileID: 23196136296681320}
+  - component: {fileID: 33333313407290658}
+  - component: {fileID: 114991076511996274}
   m_Layer: 8
-  m_Name: cartModuleCrate1x1
+  m_Name: cartModuleBarrel1x1
   m_TagString: Cart Module
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4280548385143474
+--- !u!4 &4795729140639940
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1913448837862008}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 17.873, y: 0, z: -3.12}
+  m_GameObject: {fileID: 1887082860749882}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -27.349, y: 0, z: -2.3610005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23025732436914574
+--- !u!23 &23196136296681320
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1913448837862008}
+  m_GameObject: {fileID: 1887082860749882}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -57,7 +57,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0bbd39b8bab1f1646b2ea6d48c600094, type: 2}
+  - {fileID: 2100000, guid: 2dde716b89b6a8a4abdfb0f539879758, type: 2}
+  - {fileID: 2100000, guid: efe9db9af16c6f640a6822b82a2e6f49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,34 +77,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33786263506858070
+--- !u!33 &33333313407290658
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1913448837862008}
-  m_Mesh: {fileID: 4300000, guid: 67a0fddb38ace5747b66a7fb2c883f93, type: 3}
---- !u!65 &65424800129861686
+  m_GameObject: {fileID: 1887082860749882}
+  m_Mesh: {fileID: 4300002, guid: 0929c546bc2d23e42b62cd2667da149a, type: 3}
+--- !u!65 &65250951234663436
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1913448837862008}
+  m_GameObject: {fileID: 1887082860749882}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5000001, z: 0.4712602}
-  m_Center: {x: 0.0000038146973, y: -0.0000009536743, z: 0.26437002}
---- !u!95 &95270910358723534
+  m_Size: {x: 0.48415, y: 0.4841501, z: 0.72080415}
+  m_Center: {x: 0, y: -1.5689041e-15, z: 0.38959807}
+--- !u!95 &95581689056981332
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1913448837862008}
+  m_GameObject: {fileID: 1887082860749882}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 67a0fddb38ace5747b66a7fb2c883f93, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 0929c546bc2d23e42b62cd2667da149a, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -112,18 +113,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114034851958736478
+--- !u!114 &114991076511996274
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1913448837862008}
+  m_GameObject: {fileID: 1887082860749882}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a4ac7b959a620f4989ce1a594df1e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Name: Crate
+  _Name: Barrel
   _Size: 1x1
-  _Capacity: 12
-  _Items: []
+  _Id: 3
+  _Capacity: 1
+  _StorageId: -1

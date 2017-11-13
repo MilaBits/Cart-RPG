@@ -191,7 +191,6 @@ MonoBehaviour:
   intelligence: 10
   movementSpeed: 1.5
   inventorySize: 20
-  inventoryItems: []
 --- !u!114 &114403070440694540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,7 +209,6 @@ MonoBehaviour:
   jumpSpeed: 8
   runSpeed: 8
   gravity: 20
-  InventoryUI: {fileID: 0}
 --- !u!114 &114670034671020616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,8 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207229318ffe25e419ad3e6288c90f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildUi: {fileID: 0}
-  camera: {fileID: 20752622479845590}
   maxBuildRange: 0
   ModuleIndex: 0
   Modules:
