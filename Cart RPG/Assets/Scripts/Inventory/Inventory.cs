@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : MonoBehaviour
+{
     private GameObject slotPanel;
     private ItemDatabase itemDatabase;
     public GameObject UI;
@@ -14,7 +15,8 @@ public class Inventory : MonoBehaviour {
     public List<Item> items = new List<Item>();
     public List<GameObject> slots = new List<GameObject>();
 
-    void Start() {
+    void Start()
+    {
         itemDatabase = GameObject.Find("Game").GetComponent<ItemDatabase>();
         //inventoryPanel = GameObject.Find("PlayerInventory");
         if (transform.Find("SlotContainer").gameObject == null)
@@ -22,22 +24,24 @@ public class Inventory : MonoBehaviour {
 
         slotPanel = transform.Find("SlotContainer").gameObject;
 
-        Init();
+        Init(slotAmount);
         //AddItem() here for testing
         //AddItem(0, 0);
         //AddItem(0, 4);
         //AddItem(1, 2);
 
+        transform.gameObject.SetActive(false);
+
     }
 
-    private void Init() {
-        if (slotPanel.transform.childCount > 0) {
-            foreach (Transform child in slotPanel.transform) {
-                try {
-                    //Destroy(child.GetChild(0).gameObject);
-                } catch (Exception ex) {
-                    Debug.Log("No child to destroy");
-                }
+    public void Init(int slotAmount)
+    {
+        this.slotAmount = slotAmount;
+
+        if (slotPanel.transform.childCount > 0)
+        {
+            foreach (Transform child in slotPanel.transform)
+            {
                 Destroy(child.gameObject);
             }
         }
@@ -45,7 +49,8 @@ public class Inventory : MonoBehaviour {
         items = new List<Item>();
         slots = new List<GameObject>();
 
-        for (int i = 0; i < slotAmount; i++) {
+        for (int i = 0; i < this.slotAmount; i++)
+        {
             items.Add(new Item());
             slots.Add(Instantiate(inventorySlot));
             slots[i].transform.SetParent(slotPanel.transform);
@@ -55,20 +60,28 @@ public class Inventory : MonoBehaviour {
 
     }
 
-    public void AddItem(int id) {
+    public void AddItem(int id)
+    {
         Item itemToAdd = itemDatabase.GetItemById(id);
-        if (itemToAdd.Stackable && isInInventory(itemToAdd.Id)) {
-            for (int i = 0; i < items.Count; i++) {
-                if (items[i].Id == id) {
+        if (itemToAdd.Stackable && isInInventory(itemToAdd.Id))
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].Id == id)
+                {
                     ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
                     data.amount++;
                     data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
                     break;
                 }
             }
-        } else {
-            for (int i = 0; i < items.Count; i++) {
-                if (items[i].Id == -1) {
+        }
+        else
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].Id == -1)
+                {
 
                     items[i] = itemToAdd;
                     GameObject itemObject = Instantiate(inventoryItem);
@@ -88,26 +101,36 @@ public class Inventory : MonoBehaviour {
             }
         }
     }
-    public void AddItem(int id, int amount) {
+    public void AddItem(int id, int amount)
+    {
         Item addItem = itemDatabase.GetItemById(id);
         List<Item> itemsToAdd = new List<Item>();
-        for (int addIndex = 0; addIndex < amount; addIndex++) {
+        for (int addIndex = 0; addIndex < amount; addIndex++)
+        {
             itemsToAdd.Add(addItem);
         }
 
-        foreach (Item itemToAdd in itemsToAdd) {
-            if (itemToAdd.Stackable && isInInventory(itemToAdd.Id)) {
-                for (int i = 0; i < items.Count; i++) {
-                    if (items[i].Id == id) {
+        foreach (Item itemToAdd in itemsToAdd)
+        {
+            if (itemToAdd.Stackable && isInInventory(itemToAdd.Id))
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    if (items[i].Id == id)
+                    {
                         ItemData data = slots[i].transform.GetChild(0).GetComponent<ItemData>();
                         data.amount++;
                         data.transform.GetChild(0).GetComponent<Text>().text = data.amount.ToString();
                         break;
                     }
                 }
-            } else {
-                for (int i = 0; i < items.Count; i++) {
-                    if (items[i].Id == -1) {
+            }
+            else
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    if (items[i].Id == -1)
+                    {
 
                         items[i] = itemToAdd;
                         GameObject itemObject = Instantiate(inventoryItem);
@@ -129,12 +152,17 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-    public List<int> getItemAmounts() {
+    public List<int> getItemAmounts()
+    {
         List<int> amounts = new List<int>();
-        for (int i = 0; i < items.Count; i++) {
-            try {
+        for (int i = 0; i < items.Count; i++)
+        {
+            try
+            {
                 amounts.Add(slots[i].transform.GetChild(0).GetComponent<ItemData>().amount);
-            } catch {
+            }
+            catch
+            {
                 amounts.Add(0);
             }
 
@@ -142,17 +170,22 @@ public class Inventory : MonoBehaviour {
         return amounts;
     }
 
-    public void LoadItemsFromDatabase(int id) {
-        Init();
+    public void LoadItemsFromDatabase(int id)
+    {
+        Init(slotAmount);
         Storage storage = itemDatabase.GetStorage(id);
-        foreach (var item in storage.items) {
+        foreach (var item in storage.items)
+        {
             AddItem(item.Key, item.Value);
         }
     }
 
-    private bool isInInventory(int id) {
-        for (int i = 0; i < items.Count; i++) {
-            if (items[i].Id == id) {
+    private bool isInInventory(int id)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].Id == id)
+            {
                 return true;
             }
         }

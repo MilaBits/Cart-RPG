@@ -3,10 +3,7 @@ using UnityEngine.UI;
 
 public class ModulePlacer : MonoBehaviour
 {
-    [SerializeField]
-    private Canvas buildUi;
-
-    [SerializeField]
+    private GameObject buildUI;
     private Camera camera;
 
     private Text text;
@@ -31,7 +28,9 @@ public class ModulePlacer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        text = buildUi.GetComponentsInChildren<Text>()[1];
+        camera = Camera.main;
+        buildUI = GameObject.Find("BuildUI");
+        text = buildUI.GetComponentsInChildren<Text>()[1];
         gridScript = grid.GetComponent<GridScript>();
     }
 

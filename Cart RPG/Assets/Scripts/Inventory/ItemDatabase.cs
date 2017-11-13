@@ -7,7 +7,8 @@ using System.Text;
 using UnityEngine;
 using LitJson;
 
-public class ItemDatabase : MonoBehaviour {
+public class ItemDatabase : MonoBehaviour
+{
 
     private List<Item> itemDatabase = new List<Item>();
     private List<Storage> storageDatabase = new List<Storage>();
@@ -19,7 +20,8 @@ public class ItemDatabase : MonoBehaviour {
     private string storageTest = "/StreamingAssets/InventoriesTest.json";
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + itemPath));
         ConstructItemDatabase();
 
@@ -27,14 +29,18 @@ public class ItemDatabase : MonoBehaviour {
         ConstructStorageDatabase();
     }
 
-    public Item GetItemById(int id) {
+    public Item GetItemById(int id)
+    {
         return itemDatabase.Find(i => i.Id == id);
     }
 
-    private void ConstructItemDatabase() {
+    private void ConstructItemDatabase()
+    {
         itemDatabase.Clear();
-        for (int i = 0; i < itemData.Count; i++) {
-            switch ((int)itemData[i]["type"]) {
+        for (int i = 0; i < itemData.Count; i++)
+        {
+            switch ((int)itemData[i]["type"])
+            {
                 case (int)ItemType.Weapon:
                     itemDatabase.Add(new Weapon((int)itemData[i]["id"], (string)itemData[i]["title"], (string)itemData[i]["description"], (int)itemData[i]["value"], (ItemType)(int)itemData[i]["type"],
                         (string)itemData[i]["slug"], (bool)itemData[i]["stackable"],
@@ -58,11 +64,14 @@ public class ItemDatabase : MonoBehaviour {
         }
     }
 
-    private void ConstructStorageDatabase() {
+    private void ConstructStorageDatabase()
+    {
         storageDatabase.Clear();
-        for (int i = 0; i < storageData.Count; i++) {
+        for (int i = 0; i < storageData.Count; i++)
+        {
             List<KeyValuePair<int, int>> items = new List<KeyValuePair<int, int>>();
-            for (int j = 0; j < storageData[i]["items"].Count; j++) {
+            for (int j = 0; j < storageData[i]["items"].Count; j++)
+            {
                 items.Add(new KeyValuePair<int, int>((int)storageData[i]["items"][j]["id"], (int)storageData[i]["items"][j]["amount"]));
             }
             storageDatabase.Add(new Storage((int)storageData[i]["id"], items));
@@ -75,15 +84,18 @@ public class ItemDatabase : MonoBehaviour {
     /// </summary>
     /// <param name="id">storage ID</param>
     /// <returns></returns>
-    public Storage GetStorage(int id) {
-        for (int i = 0; i < storageDatabase.Count; i++) {
+    public Storage GetStorage(int id)
+    {
+        for (int i = 0; i < storageDatabase.Count; i++)
+        {
             if (storageDatabase[i].id == id)
                 return storageDatabase[i];
         }
         return null;
     }
 
-    private string WriteStorageJson(int storageId, bool IsLast) {
+    private string WriteStorageJson(int storageId, bool IsLast)
+    {
         Storage storage = GetStorage(storageId);
         string json = string.Empty;
 
@@ -95,7 +107,8 @@ public class ItemDatabase : MonoBehaviour {
         writer.Write(storageId);
         writer.WritePropertyName("items");
         writer.WriteArrayStart();
-        foreach (var item in storage.items) {
+        foreach (var item in storage.items)
+        {
             writer.WriteObjectStart();
             writer.WritePropertyName("id");
             writer.Write(item.Key);
@@ -105,18 +118,22 @@ public class ItemDatabase : MonoBehaviour {
         }
         writer.WriteArrayEnd();
         writer.WriteObjectEnd();
-        if (!IsLast) {
+        if (!IsLast)
+        {
             sb.Append(',');
         }
         json = sb.ToString();
         return json;
     }
 
-    public void SaveItemsToStorage(int storageId, List<Item> items, List<int> itemAmounts) {
+    public void SaveItemsToStorage(int storageId, List<Item> items, List<int> itemAmounts)
+    {
 
         List<KeyValuePair<int, int>> storageItems = new List<KeyValuePair<int, int>>();
-        for (int i = 0; i < items.Count; i++) {
-            if (items[i].Id != -1) {
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].Id != -1)
+            {
                 storageItems.Add(new KeyValuePair<int, int>(items[i].Id, itemAmounts[i]));
             }
         }
@@ -127,8 +144,12 @@ public class ItemDatabase : MonoBehaviour {
         writer.WriteArrayStart();
 
         //inventories befor the one to edit
-        for (int i = 0; i < storageId; i++) {
-            sb.Append(WriteStorageJson(i, false));
+        if (storageId > 0)
+        {
+            for (int i = 0; i < storageId; i++)
+            {
+                sb.Append(WriteStorageJson(i, false));
+            }
         }
 
         //inventory to edit
@@ -137,7 +158,8 @@ public class ItemDatabase : MonoBehaviour {
         writer.Write(storageId);
         writer.WritePropertyName("items");
         writer.WriteArrayStart();
-        foreach (var item in storageItems) {
+        foreach (var item in storageItems)
+        {
             writer.WriteObjectStart();
             writer.WritePropertyName("id");
             writer.Write(item.Key);
@@ -151,11 +173,18 @@ public class ItemDatabase : MonoBehaviour {
             sb.Append(',');
 
         //inventories after the one to edit
-        for (int i = storageId + 1; i < storageDatabase.Count; i++) {
-            if (i != storageDatabase.Count - 1) {
-                sb.Append(WriteStorageJson(i, false));
-            } else {
-                sb.Append(WriteStorageJson(i, true));
+        if (storageDatabase.Count > storageId)
+        {
+            for (int i = storageId + 1; i < storageDatabase.Count; i++)
+            {
+                if (i != storageDatabase.Count - 1)
+                {
+                    sb.Append(WriteStorageJson(i, false));
+                }
+                else
+                {
+                    sb.Append(WriteStorageJson(i, true));
+                }
             }
         }
         writer.WriteArrayEnd();
