@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ModulePlacer : MonoBehaviour
 {
     private JsonDatabase jsonDatabase;
-    private List<GameObject> modules;
     private GameObject buildUI;
     private Camera camera;
 
@@ -23,7 +24,7 @@ public class ModulePlacer : MonoBehaviour
 
     [SerializeField]
     private GameObject grid;
-    private GridScript gridScript;
+    private GridController gridController;
 
     [SerializeField]
     private int moduleRotation = 0;
@@ -35,9 +36,8 @@ public class ModulePlacer : MonoBehaviour
         camera = Camera.main;
         buildUI = GameObject.Find("BuildUI");
         text = buildUI.GetComponentsInChildren<Text>()[1];
-        gridScript = grid.GetComponent<GridScript>();
+        gridController = grid.GetComponent<GridController>();
 
-        modules = gridScript.modules;
     }
 
     // Update is called once per frame
@@ -55,7 +55,16 @@ public class ModulePlacer : MonoBehaviour
         }
 
         // Get the closest tile to the point the player is looking at
-        Transform closestTile = getClosestTile(hit.point, gridScript.gridTiles.ToArray());
+        Transform closestTile = getClosestTile(hit.point, gridController.gridTiles.ToArray());
+
+        // Remove module
+        if (Input.GetButtonUp("Fire2"))
+        {
+            if (hit.transform.gameObject.tag == "Cart Module")
+            {
+                gridController.RemoveModule(hit.transform.gameObject);
+            }
+        }
 
         if (ghostModule != null && closestTile != null)
         {
@@ -65,24 +74,17 @@ public class ModulePlacer : MonoBehaviour
             ghostModule.transform.position = closestTile.position;
             ghostModule.transform.rotation = closestTile.rotation;
             ghostModule.transform.Rotate(new Vector3(-90, 0, moduleRotation * 90));
-
+            
             // Place module
             if (Input.GetButtonUp("Fire1"))
             {
                 GameObject placedModule = Instantiate(Modules[ModuleIndex], ghostModule.transform.position, ghostModule.transform.rotation,
                     ghostModule.transform.parent);
-                
-                modules.Add(placedModule);
-                jsonDatabase.UpdateModuleDatabase(modules);
+
+
+                gridController.AddModule(placedModule, gridController.gridTiles.FindIndex(t => t.transform == closestTile.transform));
             }
-            // Remove module
-            if (Input.GetButtonUp("Fire2"))
-            {
-                if (hit.transform.gameObject.tag == "Cart Module")
-                {
-                    GameObject.Destroy(hit.transform.gameObject);
-                }
-            }
+
         }
         else if (ghostModule != null)
         {

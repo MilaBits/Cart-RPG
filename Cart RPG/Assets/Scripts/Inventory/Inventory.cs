@@ -174,6 +174,11 @@ public class Inventory : MonoBehaviour
     {
         Init(slotAmount);
         Storage storage = _jsonDatabase.GetStorage(id);
+        if (storage == null)
+        {
+            Debug.Log("No storage with an id of " + id + " exists in the storage database, no items to load into this object's inventory");
+            return;
+        }
         foreach (var item in storage.items)
         {
             AddItem(item.Key, item.Value);

@@ -18,7 +18,6 @@ public class CartModuleGrid : MonoBehaviour {
     void Update()
     {
         gridPosition = transform.position + gridPosition;
-        
     }
 
     void LateUpdate()

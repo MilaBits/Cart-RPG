@@ -21,6 +21,7 @@ public class JsonDatabase : MonoBehaviour
     private string itemPath = "/StreamingAssets/Items.json";
     private string storagePath = "/StreamingAssets/Inventories.json";
     private string modulePath = "/StreamingAssets/CartModules.json";
+    private string moduleTestPath = "/StreamingAssets/CartModulesTest.json";
 
     // Use this for initialization
     void Start()
@@ -107,14 +108,21 @@ public class JsonDatabase : MonoBehaviour
         writer.Write(storageId);
         writer.WritePropertyName("items");
         writer.WriteArrayStart();
-        foreach (var item in storage.items)
+        if (storage != null)
         {
-            writer.WriteObjectStart();
-            writer.WritePropertyName("id");
-            writer.Write(item.Key);
-            writer.WritePropertyName("amount");
-            writer.Write(item.Value);
-            writer.WriteObjectEnd();
+            foreach (var item in storage.items)
+            {
+                writer.WriteObjectStart();
+                writer.WritePropertyName("id");
+                writer.Write(item.Key);
+                writer.WritePropertyName("amount");
+                writer.Write(item.Value);
+                writer.WriteObjectEnd();
+            }
+        }
+        else
+        {
+            Debug.Log("No storage with an id of " + storageId + " exists in the storage database, unable storage to update");
         }
         writer.WriteArrayEnd();
         writer.WriteObjectEnd();
@@ -123,12 +131,13 @@ public class JsonDatabase : MonoBehaviour
             sb.Append(',');
         }
         json = sb.ToString();
+        json.Contains("]}]");
+        json.Remove(json.LastIndexOf(','), 1);
         return json;
     }
 
     public void SaveItemsToStorage(int storageId, List<Item> items, List<int> itemAmounts)
     {
-
         List<KeyValuePair<int, int>> storageItems = new List<KeyValuePair<int, int>>();
         for (int i = 0; i < items.Count; i++)
         {
@@ -213,8 +222,41 @@ public class JsonDatabase : MonoBehaviour
     public void UpdateModuleDatabase(List<GameObject> modules)
     {
         ConstructModuleDatabase();
-        //TODO: Update module database
+        StringBuilder sb = new StringBuilder();
+        JsonWriter writer = new JsonWriter(sb);
 
+        writer.WriteArrayStart();
+        writer.WriteObjectStart();
+        writer.WritePropertyName("idCount");
+        writer.Write(modules.Count);
+        writer.WritePropertyName("modules");
+        writer.WriteArrayStart();
+        foreach (GameObject module in modules)
+        {
+            CartModule cartModule = module.GetComponent<CartModule>();
+            writer.WriteObjectStart();
+            writer.WritePropertyName("position");
+            writer.Write(cartModule.Position);
+            writer.WritePropertyName("type");
+            writer.Write((int)cartModule.Type);
+            writer.WritePropertyName("rotation");
+            writer.Write((int)Mathf.Round(module.transform.localRotation.eulerAngles.y));
+            writer.WritePropertyName("storageId");
+            if (cartModule is CartStorageModule)
+            {
+                writer.Write(((CartStorageModule)cartModule).StorageId);
+            }
+            else
+            {
+                writer.Write(-1);
+            }
+            writer.WriteObjectEnd();
+        }
+        writer.WriteArrayEnd();
+        writer.WriteObjectEnd();
+        writer.WriteArrayEnd();
+
+        File.WriteAllText(Application.dataPath + modulePath, sb.ToString());
     }
 
     #endregion

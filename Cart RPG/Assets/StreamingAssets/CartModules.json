@@ -1,30 +1,24 @@
 [
 	{
-		"idCount": 0,
+		"idCount": 3,
 		"modules": [
 			{
-				"position": 0,
-				"type": 0,
-				"rotation": 90,
-				"storageId": 1
-			},
-			{
-				"position": 2,
-				"type": 1,
-				"rotation": 90,
-				"storageId": 2
-			},
-			{
 				"position": 3,
-				"type": 1,
-				"rotation": 0,
-				"storageId": 5
-			},
-			{
-				"position": 7,
-				"type": 2,
+				"type": 3,
 				"rotation": 0,
 				"storageId": -1
+			},
+			{
+				"position": 8,
+				"type": 3,
+				"rotation": 0,
+				"storageId": -1
+			},
+			{
+				"position": 14,
+				"type": 2,
+				"rotation": 0,
+				"storageId": 0
 			}
 		]
 	}

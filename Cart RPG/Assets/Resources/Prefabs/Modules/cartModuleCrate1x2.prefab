@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1010019300914696}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -25.384174, y: 0.025365204, z: -8.806051}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,7 +93,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.0000002, z: 0.4887861}
+  m_Size: {x: 0.45, y: 0.95, z: 0.4887861}
   m_Center: {x: 0, y: -0.250001, z: 0.25560707}
 --- !u!95 &95500772316309332
 Animator:
@@ -126,5 +126,7 @@ MonoBehaviour:
   _Name: Wide Crate
   _Size: 1x2
   _Id: 2
+  _Position: 0
+  _type: 0
   _Capacity: 16
-  _StorageId: 5
+  _StorageId: 2

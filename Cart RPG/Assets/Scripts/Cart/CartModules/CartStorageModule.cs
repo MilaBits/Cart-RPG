@@ -19,7 +19,7 @@ public class CartStorageModule : CartModule
         set { _StorageId = value; }
     }
 
-    public CartStorageModule(string name, string size, int id, int capacity) : base(name, size, id)
+    public CartStorageModule(string name, string size, int id, ModuleType type, int capacity) : base(name, size, id, type)
     {
         _Capacity = capacity;
     }

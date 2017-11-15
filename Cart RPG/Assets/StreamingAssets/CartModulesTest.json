@@ -1,0 +1,25 @@
+[
+	{
+		"idCount": 3,
+		"modules": [
+			{
+				"position": 0,
+				"type": 0,
+				"rotation": 0.0,
+				"storageId": 1
+			},
+			{
+				"position": 2,
+				"type": 1,
+				"rotation": 90.0,
+				"storageId": 2
+			},
+			{
+				"position": 2,
+				"type": 0,
+				"rotation": 0.0,
+				"storageId": 2
+			}
+		]
+	}
+]

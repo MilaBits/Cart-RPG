@@ -64,7 +64,7 @@ public class UIController : MonoBehaviour
 
     public void ShowObjectInventory(CartStorageModule objectStorage)
     {
-        this.objectStorageId = objectStorage.Id;
+        this.objectStorageId = objectStorage.StorageId;
         //show inventory
         ObjectWindow.SetActive(true);
         //Load items

@@ -18,4 +18,4 @@ public class ModuleData
     }
 }
 
-public enum ModuleType { Crate, CrateWide, Barrel, Cage, CageBig }
+public enum ModuleType { Unassigned, Crate, CrateWide, Barrel, Cage, CageBig }

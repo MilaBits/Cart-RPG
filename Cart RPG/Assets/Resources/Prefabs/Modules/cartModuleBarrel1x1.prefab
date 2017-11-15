@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1887082860749882}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -27.349, y: 0, z: -2.3610005}
+  m_LocalPosition: {x: -26.04256, y: 0.021113247, z: -8.628302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.48415, y: 0.4841501, z: 0.72080415}
+  m_Size: {x: 0.45, y: 0.45, z: 0.72080415}
   m_Center: {x: 0, y: -1.5689041e-15, z: 0.38959807}
 --- !u!95 &95581689056981332
 Animator:
@@ -127,5 +127,7 @@ MonoBehaviour:
   _Name: Barrel
   _Size: 1x1
   _Id: 3
+  _Position: 0
+  _type: 0
   _Capacity: 1
-  _StorageId: -1
+  _StorageId: 2
