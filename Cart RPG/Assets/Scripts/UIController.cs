@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
@@ -33,6 +34,20 @@ public class UIController : MonoBehaviour
         PlayerInventory = PlayerWindow.GetComponent<Inventory>();
         ObjectInventory = ObjectWindow.GetComponent<Inventory>();
 
+
+        //Lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.SetCursor(Resources.Load<Texture2D>("Sprites/UI/cursorHand_beige"), new Vector2(1, 1), CursorMode.Auto);
+
+    }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus && GameUI != null)
+        {
+            if (GameUI.activeSelf) Cursor.lockState = CursorLockMode.Locked;
+            else Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void HidePlayerInventory()
@@ -42,6 +57,8 @@ public class UIController : MonoBehaviour
         //hide inventory
         PlayerWindow.SetActive(false);
         GameUI.SetActive(true);
+        BuildUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void HideObjectInventory()
@@ -51,6 +68,8 @@ public class UIController : MonoBehaviour
         //hide inventory
         ObjectWindow.SetActive(false);
         GameUI.SetActive(true);
+        BuildUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ShowPlayerInventory()
@@ -60,6 +79,8 @@ public class UIController : MonoBehaviour
         //Load items
         PlayerInventory.LoadItemsFromDatabase(playerStorageId);
         GameUI.SetActive(false);
+        BuildUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void ShowObjectInventory(CartStorageModule objectStorage)
@@ -71,5 +92,8 @@ public class UIController : MonoBehaviour
         ObjectInventory.Init(objectStorage.Capacity);
         ObjectInventory.LoadItemsFromDatabase(objectStorageId);
         GameUI.SetActive(false);
+        BuildUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Debug.Log("Opened storage object with storageId: " + objectStorageId);
     }
 }

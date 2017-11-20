@@ -41,12 +41,7 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //keep cursor in game window
-        if (Input.GetKeyDown(KeyCode.Mouse0) && uiController.PlayerWindow.activeSelf == false)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+    { 
 
         if (!uiController.PlayerWindow.activeSelf && !uiController.ObjectWindow.activeSelf)
         {
@@ -131,7 +126,6 @@ public class PlayerController : MonoBehaviour
 
                     uiController.ShowPlayerInventory();
                     uiController.ShowObjectInventory(hit.transform.GetComponent<CartStorageModule>());
-                    Cursor.lockState = CursorLockMode.None;
                 }
             }
 

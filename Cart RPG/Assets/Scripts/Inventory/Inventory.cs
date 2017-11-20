@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     private GameObject slotPanel;
-    private JsonDatabase _jsonDatabase;
-    public GameObject UI;
+    private JsonDatabase jsonDatabase;
     public GameObject inventorySlot;
     public GameObject inventoryItem;
 
@@ -17,8 +16,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        _jsonDatabase = GameObject.Find("Game").GetComponent<JsonDatabase>();
-        //inventoryPanel = GameObject.Find("PlayerInventory");
+        jsonDatabase = GameObject.Find("Game").GetComponent<JsonDatabase>();
         if (transform.Find("SlotContainer").gameObject == null)
             Debug.Log(name + ": no child object called SlotContainer");
 
@@ -31,7 +29,6 @@ public class Inventory : MonoBehaviour
         //AddItem(1, 2);
 
         transform.gameObject.SetActive(false);
-
     }
 
     public void Init(int slotAmount)
@@ -62,7 +59,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(int id)
     {
-        Item itemToAdd = _jsonDatabase.GetItemById(id);
+        Item itemToAdd = jsonDatabase.GetItemById(id);
         if (itemToAdd.Stackable && isInInventory(itemToAdd.Id))
         {
             for (int i = 0; i < items.Count; i++)
@@ -103,7 +100,7 @@ public class Inventory : MonoBehaviour
     }
     public void AddItem(int id, int amount)
     {
-        Item addItem = _jsonDatabase.GetItemById(id);
+        Item addItem = jsonDatabase.GetItemById(id);
         List<Item> itemsToAdd = new List<Item>();
         for (int addIndex = 0; addIndex < amount; addIndex++)
         {
@@ -173,11 +170,12 @@ public class Inventory : MonoBehaviour
     public void LoadItemsFromDatabase(int id)
     {
         Init(slotAmount);
-        Storage storage = _jsonDatabase.GetStorage(id);
+        Storage storage = jsonDatabase.GetStorage(id);
         if (storage == null)
         {
-            Debug.Log("No storage with an id of " + id + " exists in the storage database, no items to load into this object's inventory");
-            return;
+            jsonDatabase.SaveItemsToStorage(id, new List<Item>(), new List<int>());
+            Debug.Log("No storage with an id of " + id + " exists in the storage database, no items to load into this object's inventory, added inventory to storage database");
+            storage = jsonDatabase.GetStorage(id);
         }
         foreach (var item in storage.items)
         {

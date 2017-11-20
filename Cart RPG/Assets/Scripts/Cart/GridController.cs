@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GridController : MonoBehaviour
@@ -76,7 +77,7 @@ public class GridController : MonoBehaviour
         Debug.Log(cartModule.Type.ToString());
         if (placedModule.GetComponent<CartStorageModule>() != null)
         {
-            placedModule.GetComponent<CartStorageModule>().StorageId = jsonDatabase.GetModules().Count - 1;
+            placedModule.GetComponent<CartStorageModule>().StorageId = jsonDatabase.StorageDatabase.Count;
         }
 
         modules.Add(placedModule);
@@ -127,7 +128,7 @@ public class GridController : MonoBehaviour
         }
         if (cartModule.Type == ModuleType.Unassigned)
         {
-            return false;
+            return false;   
         }
         return true;
     }

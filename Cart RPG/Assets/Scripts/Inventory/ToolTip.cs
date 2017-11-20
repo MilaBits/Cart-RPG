@@ -37,7 +37,7 @@ public class ToolTip : MonoBehaviour {
         string color = "#f8e6b0";
 
         string title = string.Format("<color=#f8e6b0><size=20>{0}</size></color>", item.Title);
-        string itemType = string.Format("<color=#b3b3b3>{0}</color>", item.ItemType);
+        string itemType = string.Format("<color=#b3b3b3>{0}</color>\n", item.ItemType);
         string value = string.Format("\n<color=#ffc100>{0} Coin </color>", item.Value);
         string description = string.Format("\n\n<color=#b3b3b3>{0}</color>\n", item.Description);
         string armorStats = string.Empty;

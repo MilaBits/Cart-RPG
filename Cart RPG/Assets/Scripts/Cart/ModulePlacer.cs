@@ -66,7 +66,7 @@ public class ModulePlacer : MonoBehaviour
             }
         }
 
-        if (ghostModule != null && closestTile != null)
+        if (ghostModule != null && closestTile != null && buildUI.activeSelf)
         {
             // Move preview of object that is to be placed to the closest grid point to where the player is aiming
             ghostModule.GetComponent<MeshRenderer>().enabled = true;
@@ -74,7 +74,7 @@ public class ModulePlacer : MonoBehaviour
             ghostModule.transform.position = closestTile.position;
             ghostModule.transform.rotation = closestTile.rotation;
             ghostModule.transform.Rotate(new Vector3(-90, 0, moduleRotation * 90));
-            
+
             // Place module
             if (Input.GetButtonUp("Fire1"))
             {
