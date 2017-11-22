@@ -128,7 +128,7 @@ public class GridController : MonoBehaviour
         }
         if (cartModule.Type == ModuleType.Unassigned)
         {
-            return false;   
+            return false;
         }
         return true;
     }

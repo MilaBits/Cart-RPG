@@ -109,6 +109,10 @@ public class Inventory : MonoBehaviour
 
         foreach (Item itemToAdd in itemsToAdd)
         {
+            if (itemToAdd == null)
+            {
+                continue;
+            }
             if (itemToAdd.Stackable && isInInventory(itemToAdd.Id))
             {
                 for (int i = 0; i < items.Count; i++)
@@ -126,22 +130,27 @@ public class Inventory : MonoBehaviour
             {
                 for (int i = 0; i < items.Count; i++)
                 {
+                    // Check if item at index is empty
                     if (items[i].Id == -1)
                     {
 
+                        // Set item
                         items[i] = itemToAdd;
+                        // Instantiate item
                         GameObject itemObject = Instantiate(inventoryItem);
 
+                        // Set correct itemdata
                         ItemData data = itemObject.GetComponent<ItemData>();
                         data.item = itemToAdd;
                         data.amount = 1;
                         data.slot = i;
 
+                        // Place item in a slot
                         itemObject.transform.SetParent(slots[i].transform);
                         itemObject.transform.localScale = new Vector3(1, 1, 1);
                         itemObject.transform.position = Vector2.zero;
-                        itemObject.GetComponent<Image>().sprite = itemToAdd.Sprite;
-                        itemObject.name = itemToAdd.Title;
+                        itemObject.GetComponent<Image>().sprite = itemToAdd.Sprite; // Set correct sprite for the image
+                        itemObject.name = itemToAdd.Title; // Set item object's name to be the item's name
                         break;
                     }
                 }

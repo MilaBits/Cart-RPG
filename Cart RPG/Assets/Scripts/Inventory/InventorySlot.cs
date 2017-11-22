@@ -24,32 +24,28 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler
 
         if (inventory.items[id].Id == -1)
         {
-            //clear item's original slot
-            originalInventory.items[droppedItem.slot] = new Item();
-
-            //Give item new slot
-            inventory.items[id] = droppedItem.item;
-            droppedItem.slot = id;
+            originalInventory.items[droppedItem.slot] = new Item(); // clear droppeditem's original slot
+            inventory.items[id] = droppedItem.item;                 // Give item new slot
+            droppedItem.slot = id;                                  // Set droppeditem's slot to be this slot
         }
         else if (droppedItem.slot != id)
         {
+            //TODO: Fix issue where when swapping items the dragged(droppedItem) item overrides the current item (after saving/reloading the inventory, id is saved wrongly in database.
 
-            //Put item in slot
-            Transform item = this.transform.GetChild(0);
-            droppedItem.inventory = inventory;
-            item.GetComponent<ItemData>().slot = droppedItem.slot;
-            item.transform.SetParent(inventory.slots[droppedItem.slot].transform);
-            item.transform.position = inventory.slots[droppedItem.slot].transform.position;
+            //Move current item to dropped item's old slot
+            ItemData currentItem = this.transform.GetChild(0).gameObject.GetComponent<ItemData>();      // Item currently in this slot
+            currentItem.inventory = droppedItem.inventory;                                              // Set current item's inventory to droppeditem's old inventory
+            currentItem.slot = droppedItem.slot;                                                        // Set current item's slot to droppeditem's old slot
+            currentItem.transform.SetParent(droppedItem.inventory.slots[droppedItem.slot].transform);   // Set current item's parent to droppeditem's old parent
+            droppedItem.inventory.items[droppedItem.slot] = currentItem.item;                           // Put current item's item in droppeditem's old inventory's item list
+                                     //TODO ^^^^^^^^ changed from id to droppedItem.slot fixed it HA
 
 
-            droppedItem.slot = id;
-            droppedItem.transform.SetParent(transform);
-            droppedItem.transform.position = transform.position;
-            RectTransform slotRect = transform.GetComponent<RectTransform>();
-            droppedItem.GetComponent<RectTransform>().rect.Set(0, 0, slotRect.rect.width, slotRect.rect.height);
-
-            inventory.items[droppedItem.slot] = item.GetComponent<ItemData>().item;
-            inventory.items[id] = droppedItem.item;
+            //Put dropped item in this slot
+            droppedItem.slot = id;                                  // Set droppeditem's slot to this slot's id
+            droppedItem.transform.SetParent(transform);             // Set droppeditem's parent to this slot
+            droppedItem.inventory = inventory;                      // Set droppeditem's inventory to be this slot's inventory
+            inventory.items[droppedItem.slot] = droppedItem.item;   // Put droppeditem's item in this slot's inventory's item list
         }
     }
 
@@ -62,3 +58,4 @@ public class InventorySlot : MonoBehaviour, IDropHandler, IPointerEnterHandler
         }
     }
 }
+

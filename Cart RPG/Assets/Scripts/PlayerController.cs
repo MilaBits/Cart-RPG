@@ -34,14 +34,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         uiController = GameObject.Find("UI").GetComponent<UIController>();
-        
+
         controller = GetComponent<CharacterController>();
         camera = GetComponentInChildren<Camera>();
     }
 
     // Update is called once per frame
     void Update()
-    { 
+    {
 
         if (!uiController.PlayerWindow.activeSelf && !uiController.ObjectWindow.activeSelf)
         {
@@ -91,6 +91,11 @@ public class PlayerController : MonoBehaviour
 
     void PlayerInteract()
     {
+
+        if (Input.GetButtonUp("BuildMode"))
+        {
+            uiController.ToggleBuildUI();
+        }
 
         if (Input.GetButtonUp("Inventory"))
         {

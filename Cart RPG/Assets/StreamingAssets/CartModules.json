@@ -1,1 +1,25 @@
-[{"idCount":3,"modules":[{"position":0,"type":3,"rotation":0,"storageId":11},{"position":6,"type":3,"rotation":0,"storageId":8},{"position":18,"type":2,"rotation":0,"storageId":12}]}]
+[
+	{
+		"idCount": 3,
+		"modules": [
+			{
+				"position": 0,
+				"type": 3,
+				"rotation": 0,
+				"storageId": 11
+			},
+			{
+				"position": 6,
+				"type": 3,
+				"rotation": 0,
+				"storageId": 8
+			},
+			{
+				"position": 18,
+				"type": 2,
+				"rotation": 0,
+				"storageId": 12
+			}
+		]
+	}
+]

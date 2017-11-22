@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler {
     public Item item;
@@ -9,6 +10,7 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public Inventory inventory;
     public Inventory Target;
     private ToolTip tooltip;
+    private Transform originalParent;
 
     public void Start()
     {
@@ -19,21 +21,26 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData) {
         if (item != null)
         {
+            GetComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.None;
             //Raise item in hierarchy so it remains on top of everything while dragging
             this.transform.SetParent(this.transform.parent.parent.parent.parent);
             this.transform.position = eventData.position;
             GetComponent<CanvasGroup>().blocksRaycasts = false;
+            originalParent = this.transform.parent;
         }
     }
 
     public void OnDrag(PointerEventData eventData) {
-        if (item != null) {
+        if (item != null)
+        {
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
             this.transform.position = eventData.position;
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        GetComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.FitInParent;
         this.transform.SetParent(Target.slots[slot].transform);
         this.transform.position = Target.slots[slot].transform.position;
         this.inventory = Target;
