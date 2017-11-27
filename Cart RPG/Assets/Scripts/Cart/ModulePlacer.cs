@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Utilities;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ModulePlacer : MonoBehaviour
 {
     private JsonDatabase jsonDatabase;
-    private GameObject buildUI;
     private Camera camera;
 
     private Text text;
@@ -26,6 +22,8 @@ public class ModulePlacer : MonoBehaviour
     private GameObject grid;
     private GridController gridController;
 
+    private HotbarController hotbarController;
+
     [SerializeField]
     private int moduleRotation = 0;
 
@@ -34,8 +32,7 @@ public class ModulePlacer : MonoBehaviour
     {
         jsonDatabase = GameObject.Find("Game").GetComponent<JsonDatabase>();
         camera = Camera.main;
-        buildUI = GameObject.Find("BuildUI");
-        text = buildUI.GetComponentsInChildren<Text>()[1];
+        hotbarController = GameObject.Find("UI").GetComponent<HotbarController>();
         gridController = grid.GetComponent<GridController>();
 
     }
@@ -66,7 +63,7 @@ public class ModulePlacer : MonoBehaviour
             }
         }
 
-        if (ghostModule != null && closestTile != null && buildUI.activeSelf)
+        if (ghostModule != null && closestTile != null && hotbarController.hotbarMode == HotbarMode.BuildMode)
         {
             // Move preview of object that is to be placed to the closest grid point to where the player is aiming
             ghostModule.GetComponent<MeshRenderer>().enabled = true;
@@ -120,7 +117,7 @@ public class ModulePlacer : MonoBehaviour
             }
 
             // Update UI to show what item is picked
-            text.text = Modules[ModuleIndex].GetComponent<CartModule>().ToString();
+            //text.text = Modules[ModuleIndex].GetComponent<CartModule>().ToString();
 
             // Replace and set up ghost image of selected item
             Destroy(ghostModule);

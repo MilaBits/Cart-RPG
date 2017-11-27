@@ -2,11 +2,12 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler {
+public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+{
     public Item item;
     public int amount = 1;
     public int slot;
-    
+
     public Inventory inventory;
     public Inventory Target;
     private ToolTip tooltip;
@@ -18,7 +19,8 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         tooltip = GameObject.Find("Game").GetComponent<ToolTip>();
     }
 
-    public void OnBeginDrag(PointerEventData eventData) {
+    public void OnBeginDrag(PointerEventData eventData)
+    {
         if (item != null)
         {
             GetComponent<AspectRatioFitter>().aspectMode = AspectRatioFitter.AspectMode.None;
@@ -30,7 +32,8 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
     }
 
-    public void OnDrag(PointerEventData eventData) {
+    public void OnDrag(PointerEventData eventData)
+    {
         if (item != null)
         {
             GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -47,11 +50,13 @@ public class ItemData : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-    public void OnPointerEnter(PointerEventData eventData) {
+    public void OnPointerEnter(PointerEventData eventData)
+    {
         tooltip.Activate(item);
     }
 
-    public void OnPointerExit(PointerEventData eventData) {
+    public void OnPointerExit(PointerEventData eventData)
+    {
         tooltip.Deactivate();
     }
 }
