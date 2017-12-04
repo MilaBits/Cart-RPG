@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,6 +21,7 @@ class HotbarController : MonoBehaviour
     private int itemIndex;
 
     private Transform previousItem;
+    private GameObject HeldItem;
 
     public HotbarMode hotbarMode;
 
@@ -35,6 +35,9 @@ class HotbarController : MonoBehaviour
         defaultColor = itemContainer.transform.GetChild(0).GetComponent<Image>().color;
         highlightColor = new Color(1f, 0.875f, 0.612f);
         previousItem = itemContainer.transform.GetChild(0);
+        HeldItem = GameObject.Find("Hand");
+
+        Init();
     }
 
     void Update()
@@ -48,21 +51,41 @@ class HotbarController : MonoBehaviour
             itemCount = uiController.PlayerInventory.items.Count(i => i.Id != -1);
         }
 
-
-
         updateCurrentItem();
+    }
+
+    private void Init()
+    {
+        itemIndex = 0;
+        UpdateHighlight();
+        UpdateText();
+        UpdateHand(itemIndex);
+    }
+    private void UpdateHand(int i)
+    {
+        if (hotbarMode == HotbarMode.BuildMode)
+        {
+            HeldItem.GetComponent<MeshFilter>().mesh = modulePlacer.Modules[i].GetComponent<MeshFilter>().sharedMesh;
+            HeldItem.GetComponent<MeshRenderer>().materials = modulePlacer.Modules[i].GetComponent<MeshRenderer>().sharedMaterials;
+            return;
+        }
+        if (hotbarMode == HotbarMode.InventoryMode)
+        {
+            string path = uiController.PlayerInventory.items[i].SpritePath;
+            if (Resources.Load<Mesh>("Models/Items/" + path) == null)
+            {
+                path = "NoModel";
+            }
+            HeldItem.GetComponent<MeshFilter>().mesh = Resources.Load<Mesh>("Models/Items/" + path);
+            HeldItem.GetComponent<MeshRenderer>().materials = Resources.Load<MeshRenderer>("Models/Items/" + path).sharedMaterials;
+        }
     }
 
     void updateCurrentItem()
     {
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            int max = itemContainer.transform.childCount - 1;
-            if (hotbarMode == HotbarMode.BuildMode)
-            {
-                max = modulePlacer.Modules.Length - 1;
-            }
-
+            int max = itemCount - 1;
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
                 if (itemIndex < max)
@@ -88,25 +111,8 @@ class HotbarController : MonoBehaviour
 
             UpdateHighlight();
             UpdateText();
-            UpdateHand();
+            UpdateHand(itemIndex);
         }
-
-        //if (Input.GetButtonUp("Rotate Module"))
-        //{
-        //    if (moduleRotation < 3)
-        //    {
-        //        moduleRotation++;
-        //    }
-        //    else
-        //    {
-        //        moduleRotation = 0;
-        //    }
-        //}
-    }
-
-    private void UpdateHand()
-    {
-        //TODO: Show item model in lower right of screen
     }
 
     private void UpdateHighlight()

@@ -152,5 +152,6 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 f671a42aea5f34fec6a4450a3668c615 Assembly-CSharp.dll:UnityEngine.PostProcessing.PostProcessingProfile
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EnemyController
+91bca545c1ab667c28cbe357b0e08496 Assembly-CSharp.dll:.HotbarController
 e0979a0e4eb346472e1d633bc7c2f496 Assembly-CSharp.dll:.GridController
 5cfe86e1173a743b1fcb0b3c09481ae0 Assembly-CSharp.dll:.Character

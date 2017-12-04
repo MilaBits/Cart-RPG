@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     public GameObject ObjectWindow { get; private set; }
     public GameObject BuildUI { get; private set; }
     public GameObject GameUI { get; private set; }
+    public GameObject Menu { get; private set; }
 
     //Inventories
     private int playerStorageId = 0;
@@ -31,6 +32,7 @@ public class UIController : MonoBehaviour
         PlayerWindow = transform.Find("PlayerWindow").gameObject;
         ObjectWindow = transform.Find("ObjectWindow").gameObject;
         GameUI = transform.Find("GameUI").gameObject;
+        Menu = transform.Find("Menu").gameObject;
 
         hotBarContainer = GameObject.Find("HotbarItems");
         modulePlacer = GameObject.Find("Player").GetComponent<ModulePlacer>();
@@ -105,17 +107,18 @@ public class UIController : MonoBehaviour
 
     public void ToggleBuildUI()
     {
+        ClearHotbar();
         if (hotbarController.hotbarMode == HotbarMode.BuildMode)
         {
             hotbarController.hotbarMode = HotbarMode.InventoryMode;
             GameObject.Find("ModeImage").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/UI/person");
-
         }
         else
         {
             hotbarController.hotbarMode = HotbarMode.BuildMode;
             GameObject.Find("ModeImage").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/UI/hammer");
         }
+        UpdateHotbarItems();
     }
     public void ToggleBuildUI(HotbarMode hotbarMode)
     {
@@ -132,12 +135,11 @@ public class UIController : MonoBehaviour
     public void UpdateHotbarItems()
     {
         ClearHotbar();
-
         for (int i = 0; i < PlayerInventory.slots.Count; i++)
         {
             if (hotbarController.hotbarMode == HotbarMode.BuildMode)
             {
-                if (i > modulePlacer.Modules.Length)
+                if (i >= modulePlacer.Modules.Length)
                 {
                     break; // All modules loaded
                 }
@@ -166,6 +168,25 @@ public class UIController : MonoBehaviour
 
         }
 
+    }
+
+    public void ToggleMenu()
+    {
+        if (Menu.activeSelf)
+        {
+            Menu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Menu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     private void ClearHotbar()

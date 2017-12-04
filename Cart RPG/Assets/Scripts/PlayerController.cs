@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (!uiController.PlayerWindow.activeSelf && !uiController.ObjectWindow.activeSelf)
+        if (!uiController.PlayerWindow.activeSelf && !uiController.ObjectWindow.activeSelf && !uiController.Menu.activeSelf)
         {
             CameraMovement();
             PlayerMovement();
@@ -91,6 +91,11 @@ public class PlayerController : MonoBehaviour
 
     void PlayerInteract()
     {
+
+        if (Input.GetButtonUp("Menu"))
+        {
+            uiController.ToggleMenu();
+        }
 
         if (Input.GetButtonUp("BuildMode"))
         {
